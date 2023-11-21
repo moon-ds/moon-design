@@ -1086,9 +1086,6 @@ importers:
         specifier: 1.8.9
         version: 1.8.9(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
-      '@types/react-table':
-        specifier: ^7.7.18
-        version: 7.7.18
       '@types/react-window':
         specifier: 1.8.5
         version: 1.8.5
@@ -5155,12 +5152,6 @@ packages:
 
   /@types/react-table@7.7.14:
     resolution: {integrity: sha512-TYrv7onCiakaG1uAu/UpQ9FojNEt/4/ht87EgJQaEGFoWV606ZLWUZAcUHzMxgc3v1mywP1cDyz3qB4ho3hWOw==}
-    dependencies:
-      '@types/react': 18.2.19
-    dev: true
-
-  /@types/react-table@7.7.18:
-    resolution: {integrity: sha512-OncztdDERQ35pjcQCpNoQe8KPOE8Rg2Ox4PlZHMGNgHTEaM1JyT2lWfNNbj2sCnOtQOHrOH7SzUnGUAXzqdksg==}
     dependencies:
       '@types/react': 18.2.19
     dev: true
