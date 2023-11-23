@@ -12,7 +12,9 @@ import CustomColors from '../../public/examples/table/CustomColors';
 import CustomColumnWidths from '../../public/examples/table/CustomColumnWidths';
 import CustomContent from '../../public/examples/table/CustomContent';
 import DeepTable from '../../public/examples/table/DeepTable';
-import Default from '../../public/examples/table/Default';
+*/
+import Default from '../../public/examples/table-v8/Default';
+/*
 import Editable from '../../public/examples/table/Editable';
 import ExpandableCheckboxes from '../../public/examples/table/ExpandableCheckboxes';
 import ExpandedRows from '../../public/examples/table/ExpandedRows';
@@ -58,12 +60,12 @@ const PageTable = () => {
           .
         </p>
       </ComponentPageDescription>
-      {/*
       <Preview
         title="Default"
         preview={<Default />}
         code={examples ? examples.Default : 'Loading'}
       />
+    {/*
       <Preview
         title="With cell borders"
         preview={<CellBorder />}

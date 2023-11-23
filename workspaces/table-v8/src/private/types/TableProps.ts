@@ -1,41 +1,12 @@
-import type { Column, Row } from 'react-table';
-import ClipProps from './ClipProps';
-import KeepStateProps from './KeepStateProps';
-import type RowGaps from './RowGaps';
-import type RowSizes from './RowSizes';
-import type RowSubComponentProps from './RowSubComponentProps';
-import type TableLayout from './TableLayout';
-import type TableVariant from './TableVariant';
+import {
+  ColumnDef,
+  TableState
+} from "@tanstack/react-table";
 
 type TableProps<D extends object = {}> = {
-  columns: ReadonlyArray<Column<D>>;
-  data: readonly D[];
-  defaultColumn?: Partial<Column<D>>;
-  width?: string | number;
-  height?: string | number;
-  maxWidth?: string | number;
-  maxHeight?: string | number;
-  variant?: TableVariant;
-  layout?: TableLayout;
-  withFooter?: boolean;
-  withMinimap?: boolean;
-  expandedByDefault?: boolean;
-  defaultRowBackgroundColor?: string;
-  evenRowBackgroundColor?: string;
-  headerBackgroundColor?: string;
-  rowGap?: RowGaps;
-  rowSize?: RowSizes;
-  isCellBorder?: boolean;
-  isSticky?: boolean;
-  isSorting?: boolean;
-  selectable?: boolean;
-  useCheckbox?: boolean;
-  textClip?: ClipProps;
-  keepState?: KeepStateProps;
-  renderRowSubComponent?: (props: RowSubComponentProps) => JSX.Element;
-  getOnRowClickHandler?: (row: Row<D>) => (row: Row<D>) => void | (() => void);
-  getOnRowSelect?: () => (rows: Row<D>[]) => void | (() => void);
-  updateMyData?: <T extends {}>(t: T) => void;
+  columns: ColumnDef<D, any>[];
+  data: D[];
+  state?: Partial<TableState> | undefined;
 };
 
 export default TableProps;
