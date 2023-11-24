@@ -3,6 +3,7 @@ import {
   getCoreRowModel,
   useReactTable
 } from "@tanstack/react-table";
+import THead from "./THead";
 import TableProps from "../private/types/TableProps";
 
 const Table = ({
@@ -21,7 +22,12 @@ const Table = ({
   });
 
   return (
-    <></>
+    <table>
+      <THead table={table} />
+      <tbody>
+
+      </tbody>
+    </table>
   )
 };
 
