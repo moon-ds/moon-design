@@ -1,4 +1,16 @@
 import React from "react";
+import { Table } from "@heathmont/moon-table-v8-tw";
+import { ColumnDef } from "@tanstack/react-table";
+
+type DefaultHelper = {
+  firstName: string,
+  lastName: string,
+  age: string,
+  visits: string,
+  progress: string,
+  status: number,
+  activity: number,
+};
 
 const makeData = (length: number) => {
   return Array.from('_'.repeat(length)).map((_, index) => {
@@ -15,37 +27,47 @@ const makeData = (length: number) => {
 };
 
 const Example = () => {
-  const columnsInitial = [
+  const columns = React.useMemo<ColumnDef<{}, DefaultHelper>[]>(() => [
     {
-      Header: 'First Name',
-      accessor: 'firstName',
+      header: () => 'First Name',
+      accessorKey: 'firstName',
     },
     {
-      Header: 'Last Name',
-      accessor: 'lastName',
+      header: () => 'Last Name',
+      accessorKey: 'lastName',
     },
     {
-      Header: 'Age',
-      accessor: 'age',
+      header: () => 'Age',
+      accessorKey: 'age',
+      cell: props => (props.getValue()),
     },
     {
-      Header: 'Visits',
-      accessor: 'visits',
+      header: () => 'Visits',
+      accessorKey: 'visits',
+      cell: props => (props.getValue()),
     },
     {
-      Header: 'Activity',
-      accessor: 'activity',
+      header: () => 'Progress',
+      accessorKey: 'progress',
+      cell: props => (props.getValue()),
     },
     {
-      Header: 'Status',
-      accessor: 'status',
+      header: () => 'Activity',
+      accessorKey: 'activity',
     },
-  ];
-
-  const columns = React.useMemo(() => columnsInitial, []);
+    {
+      header: () => 'Status',
+      accessorKey: 'status',
+    },
+  ], []);
   const data = React.useMemo(() => makeData(5), []);
 
-  return (<></>);
+  return (
+    <Table
+      columns={columns}
+      data={data}
+    />
+  );
 }
 
 export default Example;

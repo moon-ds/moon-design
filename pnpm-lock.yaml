@@ -177,6 +177,9 @@ importers:
       '@heathmont/moon-icons-tw':
         specifier: 9.28.6
         version: 9.28.6(react-dom@18.2.0)(react@18.2.0)
+      '@heathmont/moon-table-v8-tw':
+        specifier: workspace:^10.10.7
+        version: link:../workspaces/table-v8
       '@heathmont/moon-themes-tw':
         specifier: workspace:^10.10.7
         version: link:../workspaces/themes
@@ -279,6 +282,9 @@ importers:
       '@heathmont/moon-table-tw':
         specifier: workspace:^10.10.7
         version: link:../workspaces/tables
+      '@heathmont/moon-table-v8-tw':
+        specifier: workspace:^10.10.7
+        version: link:../workspaces/table-v8
       '@heathmont/moon-themes':
         specifier: workspace:^10.7.1
         version: link:../packages/themes
