@@ -17,6 +17,7 @@ const Table = ({
   maxWidth,
   maxHeight,
   isSticky = true,
+  layout = 'fixed',
 }: TableProps) => {
   const table = useReactTable({
     columns,
@@ -33,6 +34,7 @@ const Table = ({
   const tableRef = useRef<HTMLDivElement>(null);
 
   const renderTableComponent = () => {
+    const tableLayout = layout === 'fixed' ? 'fixed' : 'auto';
     return (
       <TableWrapper
         style={{
@@ -44,7 +46,12 @@ const Table = ({
         className={isSticky ? 'sticky' : ''}
         tableRef={tableRef}
       >
-        <table>
+        <table
+          style={{
+            tableLayout
+          }}
+          className={layout === 'auto' ? '' : 'w-full'}
+        >
           <THead table={table} />
           <TBody table={table} />
         </table>

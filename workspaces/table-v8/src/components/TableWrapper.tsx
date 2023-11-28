@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react"
-import { mergeClassnames } from '@heathmont/moon-core-tw';
 import TableWrapperProps from "../private/types/TableWrapperProps";
 
 const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
@@ -9,10 +8,7 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
     <div
       ref={tableRef}
       style={style ?? {}}
-      className={mergeClassnames(
-        '',
-        className
-      )}
+      className={className}
     >
       {children}
     </div>

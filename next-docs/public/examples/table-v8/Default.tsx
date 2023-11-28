@@ -63,10 +63,14 @@ const Example = () => {
   const data = React.useMemo(() => makeData(5), []);
 
   return (
-    <Table
-      columns={columns}
-      data={data}
-    />
+    <div
+     className="w-full max-w-screen-lg"
+    >
+      <Table
+        columns={columns}
+        data={data}
+      />
+    </div>
   );
 }
 
