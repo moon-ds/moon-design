@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import {
+  RowData,
   getCoreRowModel,
+  getExpandedRowModel,
   useReactTable
 } from "@tanstack/react-table";
 import TableWrapper from "./TableWrapper";
@@ -16,18 +18,21 @@ const Table = ({
   height,
   maxWidth,
   maxHeight,
+  state,
   isSticky = true,
   layout = 'fixed',
+  getSubRows,
+  onExpandedChange,
 }: TableProps) => {
   const table = useReactTable({
     columns,
     data,
     defaultColumn,
-    state: {
-    },
-    onExpandedChange: () => {},
-    /* getSubRows: row => row.subRows, */
+    state,
+    onExpandedChange: onExpandedChange,
+    getSubRows: getSubRows,
     getCoreRowModel: getCoreRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
     /* debugTable: true, */
   });
 
