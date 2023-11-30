@@ -20,6 +20,8 @@ const Table = ({
   maxHeight,
   state,
   headerBackgroundColor = 'bg-gohan',
+  defaultRowBackgroundColor = 'bg-gohan',
+  evenRowBackgroundColor = 'bg-gohan',
   rowSize = 'md',
   isSticky = true,
   layout = 'fixed',
@@ -64,7 +66,12 @@ const Table = ({
             headerBackgroundColor={headerBackgroundColor}
             rowSize={rowSize}
           />
-          <TBody table={table} />
+          <TBody
+            table={table}
+            rowSize={rowSize}
+            defaultRowBackgroundColor={defaultRowBackgroundColor}
+            evenRowBackgroundColor={evenRowBackgroundColor}
+          />
         </table>
       </TableWrapper>
   )};

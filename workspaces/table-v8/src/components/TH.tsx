@@ -2,8 +2,8 @@ import React, { forwardRef } from "react";
 import { mergeClassnames } from '@heathmont/moon-core-tw';
 import { flexRender } from "@tanstack/react-table";
 import THProps from "../private/types/THProps";
-import getFontSize from "../private/utilities/getFontSize";
-import getPadding from "../private/utilities/getPadding";
+import getFontSize from "../private/utils/getFontSize";
+import getPadding from "../private/utils/getPadding";
 
 const TH = forwardRef<HTMLTableCellElement, THProps>(
   (

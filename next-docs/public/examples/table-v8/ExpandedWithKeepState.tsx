@@ -188,7 +188,6 @@ function App() {
         state={{ expanded }}
         getSubRows={getSubRows}
         onExpandedChange={setExpanded}
-        headerBackgroundColor='bg-goku'
       />
       <div>
         <button onClick={() => refreshData()}>Refresh Data</button>

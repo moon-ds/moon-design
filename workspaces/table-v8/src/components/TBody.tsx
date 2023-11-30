@@ -1,25 +1,33 @@
 import React from "react";
-import { flexRender } from "@tanstack/react-table";
+import TD from "./TD";
 import TBodyProps from "../private/types/TBodyProps";
 
 const TBody = ({
-  table
+  table,
+  rowSize,
+  defaultRowBackgroundColor,
+  evenRowBackgroundColor
 }: TBodyProps) => {
+  const oddRowBGColor = defaultRowBackgroundColor && defaultRowBackgroundColor;
+  const evenBGColor = evenRowBackgroundColor ? evenRowBackgroundColor : oddRowBGColor;
+
   return (
     <tbody>
-      {table.getRowModel().rows.map(row => {
+      {table.getRowModel().rows.map((row, rowIndex) => {
+        const cells = row.getVisibleCells();
         return (
-          <tr key={row.id}>
-            {row.getVisibleCells().map(cell => {
-              return (
-                <td key={cell.id}>
-                  {flexRender(
-                    cell.column.columnDef.cell,
-                    cell.getContext()
-                  )}
-                </td>
-              )
-            })}
+          <tr
+            key={row.id}
+          >
+            {cells.map((cell, cellIndex) => (
+              <TD
+                cell={cell}
+                rowSize={rowSize}
+                backgroundColor={(rowIndex % 2 === 0) ? evenBGColor : oddRowBGColor}
+                isFirstColumn={cellIndex === 0}
+                isLastColumn={cellIndex === cells.length - 1}
+              />
+            ))}
           </tr>
         )
       })}
