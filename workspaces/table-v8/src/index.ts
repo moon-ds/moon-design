@@ -4,6 +4,8 @@
 
 export { default as TBody } from './components/TBody';
 export * from './components/TBody';
+export { default as TH } from './components/TH';
+export * from './components/TH';
 export { default as THead } from './components/THead';
 export * from './components/THead';
 export { default as Table } from './components/Table';

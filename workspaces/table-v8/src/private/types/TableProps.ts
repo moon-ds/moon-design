@@ -4,6 +4,7 @@ import {
   OnChangeFn,
   TableState,
 } from "@tanstack/react-table";
+import RowSizes from "./RowSizes";
 import TableLayouts from "./TableLayouts";
 
 type TableProps<D extends object = {}> = {
@@ -15,6 +16,8 @@ type TableProps<D extends object = {}> = {
   height?: string | number | undefined;
   maxWidth?: string | number | undefined;
   maxHeight?: string | number | undefined;
+  headerBackgroundColor?: string;
+  rowSize?: RowSizes;
   isSticky?: boolean;
   layout?: TableLayouts;
   getSubRows?: ((originalRow: any, index: number) => any[] | undefined) | undefined;

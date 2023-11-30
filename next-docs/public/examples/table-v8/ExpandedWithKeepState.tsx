@@ -183,9 +183,12 @@ function App() {
       <Table
         columns={columns}
         data={data}
+        width={800}
+        layout='stretched-auto'
         state={{ expanded }}
         getSubRows={getSubRows}
         onExpandedChange={setExpanded}
+        headerBackgroundColor='bg-goku'
       />
       <div>
         <button onClick={() => refreshData()}>Refresh Data</button>

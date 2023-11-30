@@ -1,31 +1,23 @@
 import React from "react";
-import { flexRender } from "@tanstack/react-table";
+import TH from "./TH";
 import THeadProps from "../private/types/THeadProps";
 
 const THead = ({
   table,
+  headerBackgroundColor,
+  rowSize,
 }: THeadProps) => {
   return (
     <thead>
       {table.getHeaderGroups().map(headerGroup => (
         <tr key={headerGroup.id}>
-          {headerGroup.headers.map(header => {
-            return (
-              <th key={header.id} colSpan={header.colSpan}>
-                {header.isPlaceholder ? null : (
-                  <div>
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                    {header.column.getCanFilter() ? (
-                      <>{/* It`s possible to place a filter here */}</>
-                    ) : null}
-                  </div>
-                )}
-              </th>
-            )
-          })}
+          {headerGroup.headers.map(header =>
+            <TH
+              header={header}
+              headerBackgroundColor={headerBackgroundColor}
+              rowSize={rowSize}
+            />
+          )}
         </tr>
       ))}
     </thead>

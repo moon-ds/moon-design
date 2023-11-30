@@ -19,6 +19,8 @@ const Table = ({
   maxWidth,
   maxHeight,
   state,
+  headerBackgroundColor = 'bg-gohan',
+  rowSize = 'md',
   isSticky = true,
   layout = 'fixed',
   getSubRows,
@@ -57,7 +59,11 @@ const Table = ({
           }}
           className={layout === 'auto' ? '' : 'w-full'}
         >
-          <THead table={table} />
+          <THead
+            table={table}
+            headerBackgroundColor={headerBackgroundColor}
+            rowSize={rowSize}
+          />
           <TBody table={table} />
         </table>
       </TableWrapper>
