@@ -3,7 +3,7 @@ import RowSizes from "./RowSizes";
 
 type THeadProps = {
   table: Table<{}>;
-  headerBackgroundColor?: string;
+  backgroundColor?: string;
   rowSize: RowSizes;
 };
 

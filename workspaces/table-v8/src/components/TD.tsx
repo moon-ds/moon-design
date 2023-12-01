@@ -19,7 +19,7 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
   <td
     key={cell.id}
     className={mergeClassnames(
-      'relative box-border text-start',
+      /*'relative */'box-border text-start',
       getFontSize(rowSize),
       getPadding(rowSize),
       backgroundColor,

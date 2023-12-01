@@ -2,7 +2,7 @@ import { Header } from "@tanstack/react-table";
 import RowSizes from "./RowSizes";
 
 type THProps = {
-  headerBackgroundColor?: string;
+  backgroundColor?: string;
   stickySide?: string;
   header: Header<{}, unknown>;
   isLastColumn?: boolean;

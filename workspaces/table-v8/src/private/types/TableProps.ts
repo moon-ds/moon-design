@@ -17,8 +17,10 @@ type TableProps<D extends object = {}> = {
   maxWidth?: string | number | undefined;
   maxHeight?: string | number | undefined;
   headerBackgroundColor?: string;
+  bodyBackgroundColor?: string;
   defaultRowBackgroundColor?: string;
   evenRowBackgroundColor?: string;
+  rowGap?: string | undefined;
   rowSize?: RowSizes;
   isSticky?: boolean;
   layout?: TableLayouts;

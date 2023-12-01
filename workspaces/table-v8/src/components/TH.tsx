@@ -8,7 +8,7 @@ import getPadding from "../private/utils/getPadding";
 const TH = forwardRef<HTMLTableCellElement, THProps>(
   (
     {
-      headerBackgroundColor,
+      backgroundColor,
       header,
       stickySide,
       isLastColumn,
@@ -21,7 +21,7 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
     <th
       key={header.id}
       colSpan={header.colSpan}
-      className={headerBackgroundColor && headerBackgroundColor}
+      className={backgroundColor && backgroundColor}
       ref={ref}
     >
       {header.isPlaceholder ? null : (

@@ -4,7 +4,7 @@ import THeadProps from "../private/types/THeadProps";
 
 const THead = ({
   table,
-  headerBackgroundColor,
+  backgroundColor,
   rowSize,
 }: THeadProps) => {
   return (
@@ -14,7 +14,7 @@ const THead = ({
           {headerGroup.headers.map(header =>
             <TH
               header={header}
-              headerBackgroundColor={headerBackgroundColor}
+              backgroundColor={backgroundColor}
               rowSize={rowSize}
             />
           )}

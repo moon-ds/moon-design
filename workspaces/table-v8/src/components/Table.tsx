@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { mergeClassnames } from "@heathmont/moon-core-tw";
 import {
   RowData,
   getCoreRowModel,
@@ -20,8 +21,10 @@ const Table = ({
   maxHeight,
   state,
   headerBackgroundColor = 'bg-gohan',
-  defaultRowBackgroundColor = 'bg-gohan',
-  evenRowBackgroundColor = 'bg-gohan',
+  bodyBackgroundColor = 'bg-gohan',
+  defaultRowBackgroundColor = 'bg-goku',
+  evenRowBackgroundColor = 'bg-goku',
+  rowGap = '1px',
   rowSize = 'md',
   isSticky = true,
   layout = 'fixed',
@@ -57,18 +60,22 @@ const Table = ({
       >
         <table
           style={{
-            tableLayout
+            tableLayout,
           }}
-          className={layout === 'auto' ? '' : 'w-full'}
+          className={mergeClassnames(
+            layout === 'auto' ? '' : 'w-full'
+          )}
         >
           <THead
             table={table}
-            headerBackgroundColor={headerBackgroundColor}
+            backgroundColor={headerBackgroundColor}
             rowSize={rowSize}
           />
           <TBody
             table={table}
+            rowGap={rowGap}
             rowSize={rowSize}
+            backgroundColor={bodyBackgroundColor}
             defaultRowBackgroundColor={defaultRowBackgroundColor}
             evenRowBackgroundColor={evenRowBackgroundColor}
           />
