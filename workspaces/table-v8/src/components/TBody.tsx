@@ -7,7 +7,6 @@ const TBody = ({
   table,
   rowGap = '0',
   rowSize,
-  backgroundColor,
   defaultRowBackgroundColor,
   evenRowBackgroundColor
 }: TBodyProps) => {
@@ -15,9 +14,7 @@ const TBody = ({
   const evenBGColor = evenRowBackgroundColor ? evenRowBackgroundColor : oddRowBGColor;
 
   return (
-    <tbody
-      className={mergeClassnames(backgroundColor)}
-    >
+    <tbody>
       {table.getRowModel().rows.map((row, rowIndex) => {
         const cells = row.getVisibleCells();
         return (

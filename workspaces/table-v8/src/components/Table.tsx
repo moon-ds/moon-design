@@ -21,7 +21,6 @@ const Table = ({
   maxHeight,
   state,
   headerBackgroundColor = 'bg-gohan',
-  bodyBackgroundColor = 'bg-gohan',
   defaultRowBackgroundColor = 'bg-goku',
   evenRowBackgroundColor = 'bg-goku',
   rowGap = '1px',
@@ -55,14 +54,18 @@ const Table = ({
           maxWidth,
           maxHeight,
         }}
-        className={isSticky ? 'sticky' : ''}
+        className={mergeClassnames(
+          isSticky ? 'sticky' : '')
+        }
         tableRef={tableRef}
       >
         <table
           style={{
             tableLayout,
+            borderSpacing: `0 ${rowGap}`
           }}
           className={mergeClassnames(
+            'border-separate',
             layout === 'auto' ? '' : 'w-full'
           )}
         >
@@ -75,7 +78,6 @@ const Table = ({
             table={table}
             rowGap={rowGap}
             rowSize={rowSize}
-            backgroundColor={bodyBackgroundColor}
             defaultRowBackgroundColor={defaultRowBackgroundColor}
             evenRowBackgroundColor={evenRowBackgroundColor}
           />
