@@ -27,6 +27,10 @@ const makeData = (length: number) => {
   });
 };
 
+/**
+ * This is TanStack`s "native" checkbox component
+ * TODO: Delete if it doesn`t required
+ */
 function IndeterminateCheckbox({
   indeterminate,
   className = '',
@@ -53,7 +57,7 @@ function IndeterminateCheckbox({
 const preset: RowSelectionState = {
   1: true,
   3: true,
-  4: true
+  4: true,
 };
 
 const Example = () => {
@@ -69,7 +73,7 @@ const Example = () => {
       id: 'select',
       header: ({ table }) => (
         <div className="px-1">
-          <Checkbox
+          <IndeterminateCheckbox
             {...{
               checked: table.getIsAllRowsSelected(),
               indeterminate: table.getIsSomeRowsSelected(),
@@ -80,7 +84,7 @@ const Example = () => {
       ),
       cell: ({ row }) => (
         <div className="px-1">
-          <Checkbox
+          <IndeterminateCheckbox
             {...{
               checked: row.getIsSelected(),
               disabled: !row.getCanSelect(),
