@@ -2,6 +2,7 @@ import {
   ColumnDef,
   ExpandedState,
   OnChangeFn,
+  RowSelectionState,
   TableState,
 } from "@tanstack/react-table";
 import RowSizes from "./RowSizes";
@@ -25,6 +26,7 @@ type TableProps<D extends object = {}> = {
   layout?: TableLayouts;
   getSubRows?: ((originalRow: any, index: number) => any[] | undefined) | undefined;
   onExpandedChange?: OnChangeFn<ExpandedState> | undefined;
+  onRowSelectionChange?: OnChangeFn<RowSelectionState> | undefined;
 };
 
 export default TableProps;

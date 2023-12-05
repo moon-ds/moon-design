@@ -29,13 +29,16 @@ const Table = ({
   layout = 'fixed',
   getSubRows,
   onExpandedChange,
+  onRowSelectionChange,
 }: TableProps) => {
   const table = useReactTable({
     columns,
     data,
     defaultColumn,
     state,
+    enableRowSelection: true,
     onExpandedChange: onExpandedChange,
+    onRowSelectionChange: onRowSelectionChange,
     getSubRows: getSubRows,
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),

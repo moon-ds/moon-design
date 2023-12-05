@@ -26,7 +26,9 @@ import LongData from '../../public/examples/table/LongData';
 import MiniMap from '../../public/examples/table/MiniMap';
 import RowGaps from '../../public/examples/table/RowGaps';
 import RowSizes from '../../public/examples/table/RowSizes';
-import SelectableCheckboxes from '../../public/examples/table/SelectableCheckboxes';
+*/
+import SelectableCheckboxes from '../../public/examples/table-v8/SelectableCheckboxes';
+/*
 import SelectableRows from '../../public/examples/table/SelectableRows';
 import Sorting from '../../public/examples/table/Sorting';
 import Tooltips from '../../public/examples/table/Tooltips';
@@ -91,11 +93,13 @@ const PageTable = () => {
         preview={<SelectableRows />}
         code={examples ? examples.SelectableRows : 'Loading'}
       />
+  */}
       <Preview
         title="Selectable checkboxes"
         preview={<SelectableCheckboxes />}
         code={examples ? examples.SelectableCheckboxes : 'Loading'}
       />
+{/*
       <Preview
         title="Custom colors"
         preview={<CustomColors />}
@@ -123,7 +127,7 @@ const PageTable = () => {
         preview={<ExpandedWithKeepState />}
         code={examples ? examples.ExpandedWithKeepState : 'Loading'}
       />
-     {/*
+  {/*
       <Preview
         title="Expanded selectable rows with checkboxes"
         preview={<ExpandableCheckboxes />}
