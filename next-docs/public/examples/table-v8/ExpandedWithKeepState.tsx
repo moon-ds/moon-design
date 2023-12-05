@@ -46,10 +46,7 @@ function makeData(...lens: number[]) {
   return makeDataLevel()
 }
 
-const PREFIX = 'example_unique_name';
-
-function App() {
-
+const Example = () => {
   const columns = React.useMemo<ColumnDef<{}, Person>[]>(
     () => [
       {
@@ -100,7 +97,6 @@ function App() {
             id: 'lastName',
             cell: info => info.getValue(),
             header: () => <span>Last Name</span>,
-            footer: props => props.column.id,
           },
         ],
       },
@@ -111,7 +107,6 @@ function App() {
           {
             accessorKey: 'age',
             header: () => 'Age',
-            footer: props => props.column.id,
           },
           {
             header: 'More Info',
@@ -119,17 +114,14 @@ function App() {
               {
                 accessorKey: 'visits',
                 header: () => <span>Visits</span>,
-                footer: props => props.column.id,
               },
               {
                 accessorKey: 'status',
                 header: 'Status',
-                footer: props => props.column.id,
               },
               {
                 accessorKey: 'progress',
                 header: 'Profile Progress',
-                footer: props => props.column.id,
               },
             ],
           },
@@ -149,33 +141,9 @@ function App() {
   const [data, setData] = React.useState(() => makeData(10, 5, 3));
 
   const refreshData = () => {
-    /* storeExpandedState(PREFIX, expanded); */
     document.location.reload();
   }
-/*
-  const storeExpandedState = (
-    prefix: string,
-    data: ExpandedState
-  ) => {
-    localStorage.setItem(prefix, JSON.stringify(data));
-  }
 
-  const restoreTableState = (prefix: string) => {
-    let states: ExpandedState = {};
-    const storedData = localStorage.getItem(PREFIX)
-    if (storedData === null) return;
-    try {
-      states = JSON.parse(storedData);
-      setExpanded(states);
-    } catch (e) {
-    } finally {
-      localStorage.removeItem(prefix);
-      return states;
-    }
-  }
-
-  useEffect(() => { restoreTableState(PREFIX) }, []);
-*/
   const getSubRows = useCallback(({ subRows }: Person) => subRows, []);
 
   return (
@@ -190,13 +158,11 @@ function App() {
         onExpandedChange={setExpanded}
       />
       <div>
-        <button onClick={() => refreshData()}>Refresh Data</button>
+        <button onClick={refreshData}>Refresh Data</button>
       </div>
       <pre>{JSON.stringify(expanded, null, 2)}</pre>
     </>
   )
-}
-
-const Example = () => App();
+};
 
 export default Example;
