@@ -16,7 +16,9 @@ import DeepTable from '../../public/examples/table/DeepTable';
 import Default from '../../public/examples/table-v8/Default';
 /*
 import Editable from '../../public/examples/table/Editable';
-import ExpandableCheckboxes from '../../public/examples/table/ExpandableCheckboxes';
+*/
+import ExpandableCheckboxes from '../../public/examples/table-v8/ExpandableCheckboxes';
+/*
 import ExpandedRows from '../../public/examples/table/ExpandedRows';
 */
 import ExpandedWithKeepState from '../../public/examples/table-v8/ExpandedWithKeepState';
@@ -127,12 +129,12 @@ const PageTable = () => {
         preview={<ExpandedWithKeepState />}
         code={examples ? examples.ExpandedWithKeepState : 'Loading'}
       />
-  {/*
       <Preview
         title="Expanded selectable rows with checkboxes"
         preview={<ExpandableCheckboxes />}
         code={examples ? examples.ExpandableCheckboxes : 'Loading'}
       />
+  {/*
       <Preview
         title="Expanded rows with custom content"
         preview={<CustomContent />}
