@@ -25,6 +25,7 @@ const Table = ({
   evenRowBackgroundColor = 'bg-goku',
   rowGap = '1px',
   rowSize = 'md',
+  isSelectable = false,
   isSticky = true,
   layout = 'fixed',
   getSubRows,
@@ -81,6 +82,7 @@ const Table = ({
             table={table}
             rowGap={rowGap}
             rowSize={rowSize}
+            isSelectable={isSelectable}
             defaultRowBackgroundColor={defaultRowBackgroundColor}
             evenRowBackgroundColor={evenRowBackgroundColor}
           />

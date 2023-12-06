@@ -1,7 +1,7 @@
 import { Checkbox } from "@heathmont/moon-core-tw";
 import { Table } from "@heathmont/moon-table-v8-tw";
 import { ColumnDef, RowSelectionState } from "@tanstack/react-table";
-import React, { HTMLProps } from "react";
+import React from "react";
 
 type DataTypeHelper = {
   firstName: string,
@@ -27,33 +27,6 @@ const makeData = (length: number) => {
   });
 };
 
-/**
- * This is TanStack`s "native" checkbox component
- * TODO: Delete if it doesn`t required
- */
-function IndeterminateCheckbox({
-  indeterminate,
-  className = '',
-  ...rest
-}: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
-  const ref = React.useRef<HTMLInputElement>(null!)
-
-  React.useEffect(() => {
-    if (typeof indeterminate === 'boolean') {
-      ref.current.indeterminate = !rest.checked && indeterminate
-    }
-  }, [ref, indeterminate])
-
-  return (
-    <input
-      type="checkbox"
-      ref={ref}
-      className={className + ' cursor-pointer'}
-      {...rest}
-    />
-  )
-}
-
 const preset: RowSelectionState = {
   1: true,
   3: true,
@@ -73,7 +46,7 @@ const Example = () => {
       id: 'select',
       header: ({ table }) => (
         <div className="px-1">
-          <IndeterminateCheckbox
+          <Checkbox
             {...{
               checked: table.getIsAllRowsSelected(),
               indeterminate: table.getIsSomeRowsSelected(),
@@ -84,7 +57,7 @@ const Example = () => {
       ),
       cell: ({ row }) => (
         <div className="px-1">
-          <IndeterminateCheckbox
+          <Checkbox
             {...{
               checked: row.getIsSelected(),
               disabled: !row.getCanSelect(),
@@ -137,6 +110,7 @@ const Example = () => {
         layout="stretched-auto"
         state={{ rowSelection }}
         onRowSelectionChange={setRowSelection}
+        isSelectable={true}
       />
       <div>
         <button onClick={refreshData}>Refresh Data</button>

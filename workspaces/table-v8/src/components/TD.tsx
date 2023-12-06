@@ -13,6 +13,7 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
     backgroundColor,
     isFirstColumn,
     isLastColumn,
+    isRowSelected = false,
   },
   ref
 ) => (
@@ -22,7 +23,7 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
       /*'relative */'box-border text-start',
       getFontSize(rowSize),
       getPadding(rowSize),
-      backgroundColor,
+      isRowSelected ? 'bg-heles' : backgroundColor,
       isFirstColumn && 'rounded-s-lg',
       isLastColumn && 'rounded-e-lg',
     )}

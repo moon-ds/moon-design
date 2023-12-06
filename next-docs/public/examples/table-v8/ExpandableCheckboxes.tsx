@@ -296,6 +296,7 @@ const Example = () => {
         getSubRows={getSubRows}
         onExpandedChange={setExpanded}
         onRowSelectionChange={setRowSelection}
+        isSelectable={true}
       />
       <div>
         <pre>Selected: {JSON.stringify(rowSelection, null, 2)}</pre>

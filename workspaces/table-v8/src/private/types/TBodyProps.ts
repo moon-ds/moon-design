@@ -5,6 +5,7 @@ type TBodyProps = {
   table: Table<{}>;
   rowGap?: string;
   rowSize: RowSizes;
+  isSelectable?: boolean;
   defaultRowBackgroundColor?: string;
   evenRowBackgroundColor?: string;
 };

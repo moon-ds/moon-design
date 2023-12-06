@@ -17,6 +17,7 @@ type TDProps = {
   /* headerBackgroundColor?: string; */
   onClick?: () => void;
   rowSize?: RowSizes;
+  isRowSelected?: boolean;
   isCellBorder?: boolean;
   /* role?: string; */
   /* textClip?: ClipProps; */

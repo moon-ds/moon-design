@@ -23,6 +23,7 @@ type TableProps<D extends object = {}> = {
   rowGap?: string | undefined;
   rowSize?: RowSizes;
   isSticky?: boolean;
+  isSelectable?: boolean;
   layout?: TableLayouts;
   getSubRows?: ((originalRow: any, index: number) => any[] | undefined) | undefined;
   onExpandedChange?: OnChangeFn<ExpandedState> | undefined;

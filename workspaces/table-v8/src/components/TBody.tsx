@@ -7,11 +7,12 @@ const TBody = ({
   table,
   rowGap = '0',
   rowSize,
+  isSelectable = false,
   defaultRowBackgroundColor,
   evenRowBackgroundColor
 }: TBodyProps) => {
   const oddRowBGColor = defaultRowBackgroundColor && defaultRowBackgroundColor;
-  const evenBGColor = evenRowBackgroundColor ? evenRowBackgroundColor : oddRowBGColor;
+  const evenRowBGColor = evenRowBackgroundColor ? evenRowBackgroundColor : oddRowBGColor;
 
   return (
     <tbody>
@@ -32,7 +33,8 @@ const TBody = ({
               <TD
                 cell={cell}
                 rowSize={rowSize}
-                backgroundColor={(rowIndex % 2 === 0) ? evenBGColor : oddRowBGColor}
+                backgroundColor={(rowIndex % 2 === 0) ? evenRowBGColor : oddRowBGColor}
+                isRowSelected={isSelectable && row.getIsSelected()}
                 isFirstColumn={cellIndex === 0}
                 isLastColumn={cellIndex === cells.length - 1}
               />
