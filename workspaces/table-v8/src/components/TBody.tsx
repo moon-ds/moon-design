@@ -34,7 +34,7 @@ const TBody = ({
                 cell={cell}
                 rowSize={rowSize}
                 backgroundColor={(rowIndex % 2 === 0) ? evenRowBGColor : oddRowBGColor}
-                isRowSelected={isSelectable && row.getIsSelected()}
+                isRowSelected={isSelectable && (row.getCanExpand() ? row.getIsAllSubRowsSelected() : row.getIsSelected())}
                 isFirstColumn={cellIndex === 0}
                 isLastColumn={cellIndex === cells.length - 1}
               />

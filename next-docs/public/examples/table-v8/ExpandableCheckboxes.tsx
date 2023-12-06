@@ -1,7 +1,7 @@
 import { Checkbox, Chip, Tooltip, mergeClassnames } from "@heathmont/moon-core-tw";
 import { ArrowsRefreshRound, ControlsChevronDown, ControlsChevronRight } from "@heathmont/moon-icons-tw";
 import { Table } from "@heathmont/moon-table-v8-tw";
-import { ColumnDef, ExpandedState, RowSelectionState } from "@tanstack/react-table";
+import { ColumnDef, ExpandedState, Row, RowSelectionState, isRowSelected } from "@tanstack/react-table";
 import React, { useCallback } from "react";
 
 type DataTypeHelper = {
@@ -208,7 +208,7 @@ const Example = () => {
             >
               <Checkbox
                 {...{
-                  checked: row.getIsSelected(),
+                  checked: row.getCanExpand() ? row.getIsAllSubRowsSelected() : row.getIsSelected(),
                   disabled: !row.getCanSelect(),
                   indeterminate: row.getIsSomeSelected(),
                   onChange: row.getToggleSelectedHandler(),
