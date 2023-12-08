@@ -1,7 +1,7 @@
 import { Checkbox, Chip, Tooltip, mergeClassnames } from "@heathmont/moon-core-tw";
 import { ArrowsRefreshRound, ControlsChevronDown, ControlsChevronRight } from "@heathmont/moon-icons-tw";
 import { Table } from "@heathmont/moon-table-v8-tw";
-import { ColumnDef, ExpandedState, Row, RowSelectionState, isRowSelected } from "@tanstack/react-table";
+import { ColumnDef, ExpandedState, Row, RowSelectionState, Table as TanStackTable, isRowSelected } from "@tanstack/react-table";
 import React, { useCallback } from "react";
 
 type DataTypeHelper = {
@@ -199,7 +199,7 @@ const Example = () => {
               </button>
             </div>
           ),
-          cell: ({ row, getValue }) => (
+          cell: ({ row }) => (
             <div
               className={mergeClassnames(
                 "flex gap-x-1",
