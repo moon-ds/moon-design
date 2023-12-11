@@ -174,6 +174,37 @@ const Example = () => {
   const [expanded, setExpanded] = React.useState<ExpandedState>(true);
   const [data, setData] = React.useState(() => makeData());
 
+  const trackCheckState = (row: Row<{}>, table: TanStackTable<{}>) => {
+    let parentRowId = row.parentId;
+    while (parentRowId) {
+      const nodeRow = table.getRow(parentRowId);
+      if (nodeRow.getIsAllSubRowsSelected() && !nodeRow.getIsSelected()) {
+        setRowSelection({...rowSelection, [nodeRow.id]: true });
+      } else if (!nodeRow.getIsAllSubRowsSelected() && nodeRow.getIsSelected()) {
+        setRowSelection(
+          Object
+            .keys(rowSelection)
+            .filter(rowId => rowId !== nodeRow.id)
+            .reduce((acc: RowSelectionState, rowId: string) => {
+              acc[rowId] = true;
+              return acc;
+            }, {})
+        );
+      }
+      parentRowId = nodeRow.parentId;
+    }
+
+    return row.getIsSelected();
+  }
+
+  const trackIndeterminateState = (row: Row<{}>) => {
+    const match = new RegExp(`(^${row.id}[\\.]|^${row.id}$)`, "");
+    const matches = Object.keys(rowSelection)
+    .filter((rowId) => match.test(rowId) && rowId !== row.id);
+
+    return !row.getIsAllSubRowsSelected() && matches.some((rowId) => rowSelection[rowId] === true);
+  }
+
   const columns = React.useMemo<ColumnDef<{}, DataTypeHelper>[]>(() => [
     {
       id: 'expand/select',
@@ -199,7 +230,7 @@ const Example = () => {
               </button>
             </div>
           ),
-          cell: ({ row }) => (
+          cell: ({ row, table }) => (
             <div
               className={mergeClassnames(
                 "flex gap-x-1",
@@ -208,9 +239,9 @@ const Example = () => {
             >
               <Checkbox
                 {...{
-                  checked: row.getCanExpand() ? row.getIsAllSubRowsSelected() : row.getIsSelected(),
+                  checked: trackCheckState(row, table),
                   disabled: !row.getCanSelect(),
-                  indeterminate: row.getIsSomeSelected(),
+                  indeterminate: trackIndeterminateState(row), /* row.getIsSomeSelected(), */
                   onChange: row.getToggleSelectedHandler(),
                 }}
               />
@@ -281,7 +312,7 @@ const Example = () => {
         }
       ],
     }
-  ], []);
+  ], [rowSelection]);
 
   const getSubRows = useCallback(({ subRows }: DataTypeHelper) => subRows, []);
 
