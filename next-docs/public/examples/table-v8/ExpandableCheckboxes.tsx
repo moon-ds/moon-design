@@ -322,6 +322,7 @@ const Example = () => {
         columns={columns}
         data={data}
         width={800}
+        height={400}
         layout="stretched-auto"
         state={{ expanded, rowSelection }}
         getSubRows={getSubRows}

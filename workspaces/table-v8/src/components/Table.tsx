@@ -59,8 +59,9 @@ const Table = ({
           maxHeight,
         }}
         className={mergeClassnames(
-          isSticky ? 'sticky' : '')
-        }
+          (height || maxHeight) && 'overflow-hidden',
+          /* isSticky ? 'sticky' : '') */
+        )}
         tableRef={tableRef}
       >
         <table
@@ -77,6 +78,8 @@ const Table = ({
             table={table}
             backgroundColor={headerBackgroundColor}
             rowSize={rowSize}
+            rowGap={rowGap}
+            isSticky={(!!height || !!maxHeight)}
           />
           <TBody
             table={table}
