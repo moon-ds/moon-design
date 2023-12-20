@@ -1,7 +1,7 @@
 import { Checkbox, Chip, Tooltip, mergeClassnames } from "@heathmont/moon-core-tw";
 import { ArrowsRefreshRound, ControlsChevronDown, ControlsChevronRight } from "@heathmont/moon-icons-tw";
 import { Table } from "@heathmont/moon-table-v8-tw";
-import { ColumnDef, ExpandedState, Row, RowSelectionState, Table as TanStackTable, isRowSelected } from "@tanstack/react-table";
+import { ColumnDef, ExpandedState, Row, RowSelectionState, Table as TanStackTable } from "@tanstack/react-table";
 import React, { useCallback } from "react";
 
 type DataTypeHelper = {
@@ -26,7 +26,10 @@ const tooltip = () => (
         }}
       />
     </Tooltip.Trigger>
-    <Tooltip.Content position="top-start">
+    <Tooltip.Content
+      position="top-start"
+      className="z-1"
+    >
       Reload page
       <Tooltip.Arrow />
     </Tooltip.Content>
@@ -241,7 +244,7 @@ const Example = () => {
                 {...{
                   checked: trackCheckState(row, table),
                   disabled: !row.getCanSelect(),
-                  indeterminate: trackIndeterminateState(row), /* row.getIsSomeSelected(), */
+                  indeterminate: trackIndeterminateState(row),
                   onChange: row.getToggleSelectedHandler(),
                 }}
               />
@@ -317,24 +320,18 @@ const Example = () => {
   const getSubRows = useCallback(({ subRows }: DataTypeHelper) => subRows, []);
 
   return (
-    <>
-      <Table
-        columns={columns}
-        data={data}
-        width={800}
-        height={400}
-        layout="stretched-auto"
-        state={{ expanded, rowSelection }}
-        getSubRows={getSubRows}
-        onExpandedChange={setExpanded}
-        onRowSelectionChange={setRowSelection}
-        isSelectable={true}
-      />
-      <div>
-        <pre>Selected: {JSON.stringify(rowSelection, null, 2)}</pre>
-        <pre>Expanded: {JSON.stringify(expanded, null, 2)}</pre>
-      </div>
-    </>
+    <Table
+      columns={columns}
+      data={data}
+      width={800}
+      height={400}
+      layout="stretched-auto"
+      state={{ expanded, rowSelection }}
+      getSubRows={getSubRows}
+      onExpandedChange={setExpanded}
+      onRowSelectionChange={setRowSelection}
+      isSelectable={true}
+    />
   );
 }
 

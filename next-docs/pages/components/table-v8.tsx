@@ -130,7 +130,7 @@ const PageTable = () => {
         code={examples ? examples.ExpandedWithKeepState : 'Loading'}
       />
       <Preview
-        title="Expanded selectable rows with checkboxes"
+        title="Expandable selectable rows with checkboxes (presetted)"
         preview={<ExpandableCheckboxes />}
         code={examples ? examples.ExpandableCheckboxes : 'Loading'}
       />
