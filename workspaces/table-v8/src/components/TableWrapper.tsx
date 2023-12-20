@@ -11,7 +11,7 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
       if ((evt.target as HTMLElement).closest('thead') !== null)
         return;
       evt.preventDefault();
-      evt.currentTarget.scrollBy(0, evt.deltaY / 4);
+      evt.currentTarget.scrollBy(0, evt.deltaY);
     }
 
     useEffect(() => {
@@ -24,8 +24,7 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
         ref={tableRef}
         style={style ?? {}}
         className={mergeClassnames(
-          className,
-          'scroll-smooth'
+          className
         )}
       >
         {children}

@@ -57,6 +57,7 @@ const Table = ({
           height,
           maxWidth,
           maxHeight,
+          scrollBehavior: 'smooth',
         }}
         className={mergeClassnames(
           (height || maxHeight) && 'overflow-hidden',
