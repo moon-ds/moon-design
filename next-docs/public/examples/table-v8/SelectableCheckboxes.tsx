@@ -1,4 +1,5 @@
-import { Checkbox } from "@heathmont/moon-core-tw";
+import { Checkbox, Chip, Tooltip } from "@heathmont/moon-core-tw";
+import { ArrowsRefreshRound } from "@heathmont/moon-icons-tw";
 import { Table } from "@heathmont/moon-table-v8-tw";
 import { ColumnDef, RowSelectionState } from "@tanstack/react-table";
 import React from "react";
@@ -11,7 +12,26 @@ type DataTypeHelper = {
   progress: string,
   status: number,
   activity: number,
+  actions: () => void,
 }
+
+const tooltip = () => (
+  <Tooltip>
+    <Tooltip.Trigger className="max-h-6">
+      <Chip
+        variant="ghost"
+        iconOnly={<ArrowsRefreshRound className="text-moon-24 max-h-6" />}
+        onClick={() => {
+          window.location.reload();
+        }}
+      />
+    </Tooltip.Trigger>
+    <Tooltip.Content position="top-start" className="z-1">
+      Reload page
+      <Tooltip.Arrow />
+    </Tooltip.Content>
+  </Tooltip>
+);
 
 const makeData = (length: number) => {
   return Array.from('_'.repeat(length)).map((_, index) => {
@@ -23,6 +43,7 @@ const makeData = (length: number) => {
       progress: <span>{Math.floor(index * 100)}</span>,
       status: Math.floor(index * 100),
       activity: Math.floor(index * 100),
+      actions: tooltip(),
     };
   });
 };
@@ -31,15 +52,13 @@ const preset: RowSelectionState = {
   1: true,
   3: true,
   4: true,
+  11: true,
+  16: true
 };
 
 const Example = () => {
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>(preset);
-  const [data, setData] = React.useState(() => makeData(10));
-
-  const refreshData = () => {
-    document.location.reload();
-  }
+  const [data, setData] = React.useState(() => makeData(20));
 
   const columns = React.useMemo<ColumnDef<{}, DataTypeHelper>[]>(() => [
     {
@@ -61,7 +80,6 @@ const Example = () => {
             {...{
               checked: row.getIsSelected(),
               disabled: !row.getCanSelect(),
-              indeterminate: row.getIsSomeSelected(),
               onChange: row.getToggleSelectedHandler(),
             }}
           />
@@ -99,24 +117,24 @@ const Example = () => {
       header: () => 'Status',
       accessorKey: 'status',
     },
+    {
+      header: () => 'Actions',
+      accessorKey: 'actions',
+      cell: props => (props.getValue()),
+    }
   ], []);
 
   return (
-    <>
-      <Table
-        columns={columns}
-        data={data}
-        width={800}
-        layout="stretched-auto"
-        state={{ rowSelection }}
-        onRowSelectionChange={setRowSelection}
-        isSelectable={true}
-      />
-      <div>
-        <button onClick={refreshData}>Refresh Data</button>
-      </div>
-      <pre>{JSON.stringify(rowSelection, null, 2)}</pre>
-    </>
+    <Table
+      columns={columns}
+      data={data}
+      width={800}
+      height={400}
+      layout="stretched-auto"
+      state={{ rowSelection }}
+      onRowSelectionChange={setRowSelection}
+      isSelectable={true}
+    />
   );
 }
 

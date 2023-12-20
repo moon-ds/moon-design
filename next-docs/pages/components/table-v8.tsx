@@ -97,7 +97,7 @@ const PageTable = () => {
       />
   */}
       <Preview
-        title="Selectable checkboxes"
+        title="Selectable checkboxes (presetted)"
         preview={<SelectableCheckboxes />}
         code={examples ? examples.SelectableCheckboxes : 'Loading'}
       />
