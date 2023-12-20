@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { Table } from "@heathmont/moon-table-v8-tw";
 import { ExpandedState, ColumnDef } from '@tanstack/react-table';
-import { ControlsChevronDown, ControlsChevronRight } from '@heathmont/moon-icons-tw';
+import { ArrowsRefreshRound, ControlsChevronDown, ControlsChevronRight } from '@heathmont/moon-icons-tw';
+import { Chip, Tooltip } from '@heathmont/moon-core-tw';
 
 type Person = {
   firstName: string
@@ -10,6 +11,7 @@ type Person = {
   visits: number
   progress: number
   status: 'relationship' | 'complicated' | 'single'
+  actions: React.JSX.Element,
   subRows?: Person[]
 }
 
@@ -21,6 +23,27 @@ const range = (len: number) => {
   return arr
 }
 
+const tooltip = () => (
+  <Tooltip>
+    <Tooltip.Trigger className="max-h-6">
+      <Chip
+        variant="ghost"
+        iconOnly={<ArrowsRefreshRound className="text-moon-24 max-h-6" />}
+        onClick={() => {
+          window.location.reload();
+        }}
+      />
+    </Tooltip.Trigger>
+    <Tooltip.Content
+      position="top-start"
+      className="z-1"
+    >
+      Reload page
+      <Tooltip.Arrow />
+    </Tooltip.Content>
+  </Tooltip>
+);
+
 const newPerson = (): Person => {
   return {
     firstName: 'FirstName',
@@ -29,6 +52,7 @@ const newPerson = (): Person => {
     visits: 1000,
     progress: 100,
     status: 'complicated',
+    actions: tooltip(),
   }
 }
 
@@ -72,6 +96,7 @@ const Example = () => {
                 style={{
                   paddingLeft: `${row.depth * 2}rem`,
                 }}
+                className='flex gap-x-1'
               >
                 <>
                   {row.getCanExpand() ? (
@@ -83,9 +108,7 @@ const Example = () => {
                     >
                       {row.getIsExpanded() ? <ControlsChevronDown /> : <ControlsChevronRight />}
                     </button>
-                  ) : (
-                    '🔵'
-                  )}{' '}
+                  ) : null}
                   {getValue()}
                 </>
               </div>
@@ -127,6 +150,17 @@ const Example = () => {
           },
         ],
       },
+      {
+        id: 'actions',
+        header: () => 'Actions',
+        columns: [
+          {
+            header: () => 'Actions',
+            accessorKey: 'actions',
+            cell: props => (props.getValue()),
+          }
+        ],
+      }
     ],
     []
   );
@@ -140,28 +174,19 @@ const Example = () => {
   const [expanded, setExpanded] = React.useState<ExpandedState>(preset);
   const [data, setData] = React.useState(() => makeData(10, 5, 3));
 
-  const refreshData = () => {
-    document.location.reload();
-  }
-
   const getSubRows = useCallback(({ subRows }: Person) => subRows, []);
 
   return (
-    <>
-      <Table
-        columns={columns}
-        data={data}
-        width={800}
-        layout='stretched-auto'
-        state={{ expanded }}
-        getSubRows={getSubRows}
-        onExpandedChange={setExpanded}
-      />
-      <div>
-        <button onClick={refreshData}>Refresh Data</button>
-      </div>
-      <pre>{JSON.stringify(expanded, null, 2)}</pre>
-    </>
+    <Table
+      columns={columns}
+      data={data}
+      width={800}
+      height={400}
+      layout='stretched-auto'
+      state={{ expanded }}
+      getSubRows={getSubRows}
+      onExpandedChange={setExpanded}
+    />
   )
 };
 

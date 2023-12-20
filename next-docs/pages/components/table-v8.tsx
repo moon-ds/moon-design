@@ -125,7 +125,7 @@ const PageTable = () => {
   */}
       <div id="expandableKeepState"></div>
       <Preview
-        title="Expanded rows with state keeping"
+        title="Expandable rows (presetted)"
         preview={<ExpandedWithKeepState />}
         code={examples ? examples.ExpandedWithKeepState : 'Loading'}
       />
