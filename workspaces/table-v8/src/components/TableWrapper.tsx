@@ -1,4 +1,4 @@
-import React, { forwardRef, KeyboardEventHandler, MutableRefObject, useCallback, useEffect, useState, WheelEvent } from "react"
+import React, { forwardRef, MutableRefObject, useCallback, useEffect, useState, WheelEvent } from "react"
 import { mergeClassnames } from "@heathmont/moon-core-tw";
 import TableWrapperProps from "../private/types/TableWrapperProps";
 
@@ -8,14 +8,23 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
   ) => {
     const kbDelta = 132;
     const [isFocused, setIsFocused] = useState(false);
+    const [isLocked, setIsLocked] = useState(false);
 
-    const handleWheel = (e: globalThis.WheelEvent) => {
+    const resetLockState = useCallback(() => {
+      setIsLocked(false);
+    }, [setIsLocked]);
+
+    const handleWheel = useCallback((e: globalThis.WheelEvent) => {
       const evt = e as unknown as WheelEvent<HTMLDivElement>;
       if ((evt.target as HTMLElement).closest('thead') !== null)
         return;
       evt.preventDefault();
-      evt.currentTarget.scrollBy(0, evt.deltaY);
-    }
+      if (!isLocked) {
+        setIsLocked(true);
+        setTimeout(resetLockState, 45);
+        evt.currentTarget.scrollBy(0, evt.deltaY);
+      }
+    }, [isLocked, setIsLocked]);
 
     const handleKbDown = useCallback((evt: React.KeyboardEvent<HTMLDivElement>) => {
       if (isFocused) {
@@ -28,10 +37,15 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
             case "ArrowLeft": kbDeltas.x = -kbDelta; break;
             case "ArrowRight": kbDeltas.x = kbDelta; break;
           }
-          evt.currentTarget.scrollBy(kbDeltas.x, kbDeltas.y);
+
+          if (!isLocked) {
+            setIsLocked(true);
+            setTimeout(resetLockState, 82);
+            evt.currentTarget.scrollBy(kbDeltas.x, kbDeltas.y);
+          }
         }
       }
-    }, [isFocused]);
+    }, [isFocused, isLocked, setIsLocked]);
 
     useEffect(() => {
       const element = (tableRef as MutableRefObject<HTMLDivElement>)?.current;
