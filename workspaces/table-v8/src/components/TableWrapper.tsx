@@ -52,6 +52,19 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
       element?.addEventListener("wheel", handleWheel, { passive: false });
     }, []);
 
+    const getBackLostFocus = useCallback((evt: React.MouseEvent) => {
+      const target = evt.target as HTMLElement;
+      const tagName = target.tagName.toUpperCase();
+      const type = (target as HTMLInputElement).type?.toLowerCase();
+      if (
+        tagName === 'SVG' ||
+        tagName === 'BUTTON' ||
+        (tagName === 'INPUT' && type === 'checkbox')
+      ) {
+        (evt.currentTarget as HTMLDivElement).focus();
+      }
+    }, []);
+
     return (
       <div
         ref={tableRef}
@@ -64,6 +77,7 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
         onFocus={() => { setIsFocused(true) }}
         onBlur={() => { setIsFocused(false) }}
         onKeyDown={(e) => { handleKbDown(e) }}
+        onClick={getBackLostFocus}
       >
         {children}
       </div>
