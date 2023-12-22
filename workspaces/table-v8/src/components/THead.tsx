@@ -20,7 +20,7 @@ const THead = ({
       top: -${top};
       width: 100%;
       height: 100%;
-      background-color: rgb(var(--gohan));
+      background-color: rgb(var(--${backgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
     }
   `;
 
