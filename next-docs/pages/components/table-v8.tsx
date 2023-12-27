@@ -24,7 +24,9 @@ import ExpandedRows from '../../public/examples/table/ExpandedRows';
 import ExpandedWithKeepState from '../../public/examples/table-v8/ExpandedWithKeepState';
 /*
 import ExtraLongDataView from '../../public/examples/table/ExtraLongDataView';
-import LongData from '../../public/examples/table/LongData';
+*/
+import LongData from '../../public/examples/table-v8/LongData';
+/*
 import MiniMap from '../../public/examples/table/MiniMap';
 import RowGaps from '../../public/examples/table/RowGaps';
 import RowSizes from '../../public/examples/table/RowSizes';
@@ -160,11 +162,13 @@ const PageTable = () => {
         preview={<Zebra />}
         code={examples ? examples.Zebra : 'Loading'}
       />
+*/}
       <Preview
         title="Long data table (with data clipping)"
         preview={<LongData />}
         code={examples ? examples.LongData : 'Loading'}
       />
+  {/*
       <Preview
         title="Tooltips"
         preview={<Tooltips />}

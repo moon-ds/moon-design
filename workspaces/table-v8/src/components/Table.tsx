@@ -68,7 +68,7 @@ const Table = ({
         <table
           style={{
             tableLayout,
-            borderSpacing: `0 ${rowGap}`
+            borderSpacing: `0 ${rowGap}`,
           }}
           className={mergeClassnames(
             'border-separate',
