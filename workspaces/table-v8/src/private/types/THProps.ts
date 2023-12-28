@@ -3,7 +3,6 @@ import RowSizes from "./RowSizes";
 
 type THProps = {
   backgroundColor?: string;
-  stickySide?: string;
   header: Header<{}, unknown>;
   isLastColumn?: boolean;
   rowSize?: RowSizes;
