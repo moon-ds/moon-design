@@ -1,4 +1,5 @@
 import { Header } from "@tanstack/react-table";
+import ColumnData from "./ColumnData";
 import RowSizes from "./RowSizes";
 
 type THProps = {
@@ -8,6 +9,7 @@ type THProps = {
   rowSize?: RowSizes;
   isCellBorder?: boolean;
   onClick?: (e: any) => void;
+  columnData?: ColumnData;
 };
 
 export default THProps;

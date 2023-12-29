@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { mergeClassnames } from "@heathmont/moon-core-tw";
 import {
   RowData,
@@ -9,7 +9,9 @@ import {
 import TableWrapper from "./TableWrapper";
 import TBody from "./TBody";
 import THead from "./THead";
+import ColumnData from "../private/types/ColumnData";
 import TableProps from "../private/types/TableProps";
+import buildColumnMap from "../private/utils/buildColumnMap";
 
 const Table = ({
   columns,
@@ -46,7 +48,12 @@ const Table = ({
     /* debugTable: true, */
   });
 
-  const tableRef = useRef<HTMLDivElement>(null);
+  const tableWrapperRef = useRef<HTMLDivElement>(null);
+  const [columnMap, setColumnMap] = useState<ColumnData[][]>();
+
+  useEffect(() => {
+    setColumnMap(buildColumnMap(tableWrapperRef.current?.childNodes[0] as HTMLTableElement));
+  }, [tableWrapperRef.current, buildColumnMap]);
 
   const renderTableComponent = () => {
     const tableLayout = layout === 'fixed' ? 'fixed' : 'auto';
@@ -63,7 +70,7 @@ const Table = ({
           (height || maxHeight) && 'overflow-hidden',
           /* isSticky ? 'sticky' : '') */
         )}
-        tableRef={tableRef}
+        tableWrapperRef={tableWrapperRef}
       >
         <table
           style={{
@@ -81,6 +88,7 @@ const Table = ({
             rowSize={rowSize}
             rowGap={rowGap}
             isSticky={(!!height || !!maxHeight)}
+            columnMap={columnMap}
           />
           <TBody
             table={table}
@@ -89,6 +97,7 @@ const Table = ({
             isSelectable={isSelectable}
             defaultRowBackgroundColor={defaultRowBackgroundColor}
             evenRowBackgroundColor={evenRowBackgroundColor}
+            columnMap={columnMap}
           />
         </table>
       </TableWrapper>

@@ -4,7 +4,7 @@ import TableWrapperProps from "../private/types/TableWrapperProps";
 
 const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
   (
-    { style, className, children, tableRef }
+    { style, className, children, tableWrapperRef }
   ) => {
     const kbDelta = 132;
     const [isFocused, setIsFocused] = useState(false);
@@ -48,7 +48,7 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
     }, [isFocused, isLocked, setIsLocked]);
 
     useEffect(() => {
-      const element = (tableRef as MutableRefObject<HTMLDivElement>)?.current;
+      const element = (tableWrapperRef as MutableRefObject<HTMLDivElement>)?.current;
       element?.addEventListener("wheel", handleWheel, { passive: false });
     }, []);
 
@@ -67,7 +67,7 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
 
     return (
       <div
-        ref={tableRef}
+        ref={tableWrapperRef}
         tabIndex={0}
         style={style ?? {}}
         className={mergeClassnames(

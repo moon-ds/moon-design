@@ -10,6 +10,7 @@ const THead = ({
   rowGap,
   rowSize,
   isSticky,
+  columnMap,
 }: THeadProps) => {
   const top = isSticky && rowGap ? rowGap : undefined;
   const Head = styled.thead`
@@ -31,13 +32,14 @@ const THead = ({
           isSticky && "sticky z-1",
         )}
       >
-        {table.getHeaderGroups().map(headerGroup => (
+        {table.getHeaderGroups().map((headerGroup, indexHG) => (
           <tr key={headerGroup.id}>
-            {headerGroup.headers.map(header =>
+            {headerGroup.headers.map((header, index) =>
               <TH
                 header={header}
                 backgroundColor={backgroundColor}
                 rowSize={rowSize}
+                columnData={columnMap && columnMap[indexHG][index]}
               />
             )}
           </tr>

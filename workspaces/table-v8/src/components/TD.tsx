@@ -18,6 +18,7 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
     isFirstColumn,
     isLastColumn,
     isRowSelected = false,
+    columnData,
   },
   ref
 ) => {
@@ -27,7 +28,7 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
     <td
       key={cell.id}
       style={{
-        right: 0, /* Temporarily rule */
+        right: `${columnData && columnData.right}px`, /* Temporarily rule */
       }}
       className={mergeClassnames(
         /*'relative */'box-border text-start',

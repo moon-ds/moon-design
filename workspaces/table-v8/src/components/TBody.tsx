@@ -8,6 +8,7 @@ const TBody = ({
   rowGap = '0',
   rowSize,
   isSelectable = false,
+  columnMap,
   defaultRowBackgroundColor,
   evenRowBackgroundColor
 }: TBodyProps) => {
@@ -37,6 +38,7 @@ const TBody = ({
                 isRowSelected={isSelectable && (row.getCanExpand() ? row.getIsAllSubRowsSelected() : row.getIsSelected())}
                 isFirstColumn={cellIndex === 0}
                 isLastColumn={cellIndex === cells.length - 1}
+                columnData={columnMap && columnMap[columnMap.length - 1][cellIndex]}
               />
             ))}
           </tr>

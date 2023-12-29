@@ -17,6 +17,7 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
       isLastColumn,
       rowSize,
       isCellBorder,
+      columnData,
       onClick
     },
     ref
@@ -28,7 +29,7 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
         key={header.id}
         colSpan={header.colSpan}
         style={{
-          right: 0, /* Temporarily rule */
+          right: `${columnData && columnData.right}px`, /* Temporarily rule */
         }}
         className={mergeClassnames(
           backgroundColor && backgroundColor,

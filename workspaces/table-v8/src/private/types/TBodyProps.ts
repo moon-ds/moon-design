@@ -1,4 +1,5 @@
 import { Table } from "@tanstack/react-table";
+import ColumnData from "./ColumnData";
 import RowSizes from "./RowSizes";
 
 type TBodyProps = {
@@ -8,6 +9,7 @@ type TBodyProps = {
   isSelectable?: boolean;
   defaultRowBackgroundColor?: string;
   evenRowBackgroundColor?: string;
+  columnMap?: ColumnData[][];
 };
 
 export default TBodyProps;
