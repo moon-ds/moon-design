@@ -29,6 +29,7 @@ const Table = ({
   rowSize = 'md',
   isSelectable = false,
   isSticky = true,
+  textClip,
   layout = 'fixed',
   getSubRows,
   onExpandedChange,
@@ -98,6 +99,7 @@ const Table = ({
             defaultRowBackgroundColor={defaultRowBackgroundColor}
             evenRowBackgroundColor={evenRowBackgroundColor}
             columnMap={columnMap}
+            textClip={textClip}
           />
         </table>
       </TableWrapper>

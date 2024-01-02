@@ -1,6 +1,7 @@
 import React, { MutableRefObject, forwardRef, useEffect, useRef } from "react";
 import { mergeClassnames } from '@heathmont/moon-core-tw';
 import { ColumnDef, flexRender } from "@tanstack/react-table";
+import styled from "styled-components";
 import THProps from "../private/types/THProps";
 import getFontSize from "../private/utils/getFontSize";
 import getPadding from "../private/utils/getPadding";
@@ -23,14 +24,21 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
     ref
   ) => {
     const stickySide = header.column.parent ? (header.column.parent?.columnDef as StickyColumn)?.sticky : (header.column.columnDef as StickyColumn)?.sticky;
+    const stickyShift = stickySide
+      ? stickySide === 'left'
+        ? `left: ${columnData ? columnData?.left : 0}px;`
+        : `right: ${columnData ? columnData?.right : 0}px;`
+      : undefined;
+
+    const HeadCell = styled.th`
+      z-index: 1;
+      ${stickyShift && stickyShift}
+    `;
 
     return (
-      <th
+      <HeadCell
         key={header.id}
         colSpan={header.colSpan}
-        style={{
-          right: `${columnData && columnData.right}px`, /* Temporarily rule */
-        }}
         className={mergeClassnames(
           backgroundColor && backgroundColor,
           stickySide && 'sticky',
@@ -54,7 +62,7 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
             ) : null}
           </div>
         )}
-      </th>
+      </HeadCell>
   )}
 );
 

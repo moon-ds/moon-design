@@ -10,7 +10,8 @@ const TBody = ({
   isSelectable = false,
   columnMap,
   defaultRowBackgroundColor,
-  evenRowBackgroundColor
+  evenRowBackgroundColor,
+  textClip,
 }: TBodyProps) => {
   const oddRowBGColor = defaultRowBackgroundColor && defaultRowBackgroundColor;
   const evenRowBGColor = evenRowBackgroundColor ? evenRowBackgroundColor : oddRowBGColor;
@@ -39,6 +40,7 @@ const TBody = ({
                 isFirstColumn={cellIndex === 0}
                 isLastColumn={cellIndex === cells.length - 1}
                 columnData={columnMap && columnMap[columnMap.length - 1][cellIndex]}
+                textClip={textClip}
               />
             ))}
           </tr>

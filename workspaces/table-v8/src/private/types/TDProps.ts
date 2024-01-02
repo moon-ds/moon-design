@@ -1,4 +1,5 @@
 import { Cell } from "@tanstack/react-table";
+import ClipProps from "./ClipProps";
 import ColumnData from "./ColumnData";
 import RowSizes from "./RowSizes";
 
@@ -22,7 +23,7 @@ type TDProps = {
   isCellBorder?: boolean;
   columnData?: ColumnData;
   /* role?: string; */
-  /* textClip?: ClipProps; */
+  textClip?: ClipProps;
 }
 
 export default TDProps;

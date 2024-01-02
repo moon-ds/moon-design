@@ -1,7 +1,8 @@
 import { Tag } from "@heathmont/moon-core-tw";
 import { Table } from "@heathmont/moon-table-v8-tw";
-import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
-import React, { useMemo } from "react";
+import ClipProps from "@heathmont/moon-table-v8-tw/lib/private/types/ClipProps";
+import { ColumnDef } from "@tanstack/react-table";
+import React from "react";
 
 type DataTypeHelper = {
   uuid: string,
@@ -19,7 +20,7 @@ const Example = () => {
     {
       id: 'operation',
       header: () => 'Transactions',
-      /* sticky: 'left', */
+      sticky: 'left',
       columns: [
         {
           header: () => 'Transaction UUID',
@@ -51,11 +52,7 @@ const Example = () => {
           header: () => 'Amount',
           accessorKey: 'amount'
         },
-        {
-          header: () => 'Currency',
-          accessorKey: 'currency',
-          cell: props => (props.getValue()),
-        },
+
       ],
     },
     {
@@ -63,6 +60,11 @@ const Example = () => {
       header: () => 'Status',
       sticky: 'right',
       columns: [
+        {
+          header: () => 'Currency',
+          accessorKey: 'currency',
+          cell: props => (props.getValue()),
+        },
         {
           header: () => 'Status',
           accessorKey: 'status',
@@ -94,6 +96,7 @@ const Example = () => {
   };
 
   const data = React.useMemo(() => makeData(40), []);
+  const textClip = 'clip' as ClipProps;
 
   return (
     <Table
@@ -102,6 +105,7 @@ const Example = () => {
       defaultColumn={defaultColumn}
       width={800}
       height={400}
+      textClip={textClip}
       layout="auto"
     />
   );
