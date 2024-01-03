@@ -1,14 +1,11 @@
-import React, { MutableRefObject, forwardRef, useEffect, useRef } from "react";
+import React, { forwardRef } from "react";
 import { mergeClassnames } from '@heathmont/moon-core-tw';
-import { ColumnDef, flexRender } from "@tanstack/react-table";
+import { flexRender } from "@tanstack/react-table";
 import styled from "styled-components";
+import StickyColumn from "../private/types/StickyColumn";
 import THProps from "../private/types/THProps";
 import getFontSize from "../private/utils/getFontSize";
 import getPadding from "../private/utils/getPadding";
-
-type StickyColumn = ColumnDef<{}> & {
-  sticky?: string | undefined;
-}
 
 const TH = forwardRef<HTMLTableCellElement, THProps>(
   (
@@ -23,15 +20,19 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
     },
     ref
   ) => {
-    const stickySide = header.column.parent ? (header.column.parent?.columnDef as StickyColumn)?.sticky : (header.column.columnDef as StickyColumn)?.sticky;
+    const stickyColumn: StickyColumn = header.column.parent ? header.column.parent?.columnDef : header.column.columnDef;
+    const stickySide = stickyColumn.sticky;
     const stickyShift = stickySide
       ? stickySide === 'left'
-        ? `left: ${columnData ? columnData?.left : 0}px;`
-        : `right: ${columnData ? columnData?.right : 0}px;`
+        ? `left: ${columnData ? columnData?.left : (header.column.columnDef as StickyColumn).left}px;`
+        : `right: ${columnData ? columnData?.right : (header.column.columnDef as StickyColumn).right}px;`
       : undefined;
 
     const HeadCell = styled.th`
       z-index: 1;
+      width: ${header.column.columnDef.size}px;
+      min-width: ${header.column.columnDef.minSize}px;
+      max-width: ${header.column.columnDef.maxSize}px;
       ${stickyShift && stickyShift}
     `;
 

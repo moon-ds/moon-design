@@ -21,14 +21,21 @@ const Example = () => {
       id: 'operation',
       header: () => 'Transactions',
       sticky: 'left',
+      left: '0',
       columns: [
         {
           header: () => 'Transaction UUID',
-          accessorKey: 'uuid'
+          accessorKey: 'uuid',
+          size: '150',
+          maxSize: '150',
+          left: '0',
         },
         {
           header: () => 'User & Supplier user',
-          accessorKey: 'user'
+          accessorKey: 'user',
+          size: '150',
+          maxSize: '150',
+          left: '150',
         },
       ],
     },
@@ -59,16 +66,24 @@ const Example = () => {
       id: 'status',
       header: () => 'Status',
       sticky: 'right',
+      right: '0',
       columns: [
         {
           header: () => 'Currency',
           accessorKey: 'currency',
           cell: props => (props.getValue()),
+          size: '90',
+          maxSize: '90',
+          right: '90',
         },
         {
           header: () => 'Status',
           accessorKey: 'status',
           cell: props => (props.getValue()),
+          size: '90',
+          minSize: '90',
+          maxSize: '100',
+          right: '0',
         },
       ]
     }

@@ -1,15 +1,12 @@
 import React, { forwardRef } from "react";
 import { mergeClassnames } from "@heathmont/moon-core-tw";
-import { ColumnDef, flexRender } from "@tanstack/react-table";
+import { flexRender } from "@tanstack/react-table";
 import styled from "styled-components";
 import ClipProps from "../private/types/ClipProps";
+import StickyColumn from "../private/types/StickyColumn";
 import TDProps from "../private/types/TDProps";
 import getFontSize from "../private/utils/getFontSize";
 import getPadding from "../private/utils/getPadding";
-
-type StickyColumn = ColumnDef<{}> & {
-  sticky?: string | undefined;
-}
 
 const TD = forwardRef<HTMLTableCellElement, TDProps>(
 (
@@ -25,16 +22,18 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
   },
   ref
 ) => {
-  const stickySide = cell.column.parent ? (cell.column.parent?.columnDef as StickyColumn)?.sticky : (cell.column.columnDef as StickyColumn)?.sticky;
+  const stickyColumn: StickyColumn = cell.column.parent ? cell.column.parent?.columnDef : cell.column.columnDef;
+  const stickySide = stickyColumn.sticky;
   const stickyShift = stickySide
       ? stickySide === 'left'
-        ? `left: ${columnData ? columnData?.left : 0}px`
-        : `right: ${columnData ? columnData?.right : 0}px`
+        ? `left: ${columnData ? columnData?.left : (cell.column.columnDef as StickyColumn).left}px`
+        : `right: ${columnData ? columnData?.right : (cell.column.columnDef as StickyColumn).right}px`
       : undefined;
 
-  /* TODO: the Max-Width rule is a hardcore entry. It`s a temporarily line */
   const BodyCell = styled.td`
-    max-width: 150px;
+    width: ${cell.column.columnDef.size}px;
+    min-width: ${cell.column.columnDef.minSize}px;
+    max-width: ${cell.column.columnDef.maxSize}px;
     ${stickyShift && stickyShift}
   `;
 
