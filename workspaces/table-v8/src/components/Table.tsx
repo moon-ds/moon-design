@@ -68,8 +68,7 @@ const Table = ({
           scrollBehavior: 'smooth',
         }}
         className={mergeClassnames(
-          (height || maxHeight) && 'overflow-hidden',
-          /* isSticky ? 'sticky' : '') */
+          isSticky && 'overflow-hidden'
         )}
         tableWrapperRef={tableWrapperRef}
       >
@@ -88,7 +87,7 @@ const Table = ({
             backgroundColor={headerBackgroundColor}
             rowSize={rowSize}
             rowGap={rowGap}
-            isSticky={(!!height || !!maxHeight)}
+            isSticky={isSticky}
             columnMap={columnMap}
           />
           <TBody

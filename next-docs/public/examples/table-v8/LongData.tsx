@@ -27,14 +27,12 @@ const Example = () => {
           header: () => 'Transaction UUID',
           accessorKey: 'uuid',
           size: '150',
-          maxSize: '150',
           left: '0',
         },
         {
           header: () => 'User & Supplier user',
           accessorKey: 'user',
           size: '150',
-          maxSize: '150',
           left: '150',
         },
       ],
@@ -73,7 +71,6 @@ const Example = () => {
           accessorKey: 'currency',
           cell: props => (props.getValue()),
           size: '90',
-          maxSize: '90',
           right: '90',
         },
         {
@@ -81,8 +78,6 @@ const Example = () => {
           accessorKey: 'status',
           cell: props => (props.getValue()),
           size: '90',
-          minSize: '90',
-          maxSize: '100',
           right: '0',
         },
       ]

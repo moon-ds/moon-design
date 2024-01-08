@@ -31,8 +31,8 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
     const HeadCell = styled.th`
       z-index: 1;
       width: ${header.column.columnDef.size}px;
-      min-width: ${header.column.columnDef.minSize}px;
-      max-width: ${header.column.columnDef.maxSize}px;
+      min-width: ${stickySide ? header.column.columnDef.size : header.column.columnDef.minSize}px;
+      max-width: ${stickySide ? header.column.columnDef.size : header.column.columnDef.maxSize}px;
       ${stickyShift && stickyShift}
     `;
 

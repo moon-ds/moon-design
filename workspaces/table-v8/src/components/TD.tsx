@@ -32,8 +32,8 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
 
   const BodyCell = styled.td`
     width: ${cell.column.columnDef.size}px;
-    min-width: ${cell.column.columnDef.minSize}px;
-    max-width: ${cell.column.columnDef.maxSize}px;
+    min-width: ${stickySide ? cell.column.columnDef.size : cell.column.columnDef.minSize}px;
+    max-width: ${stickySide ? cell.column.columnDef.size : cell.column.columnDef.maxSize}px;
     ${stickyShift && stickyShift}
   `;
 
