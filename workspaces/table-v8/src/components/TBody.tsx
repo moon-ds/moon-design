@@ -34,6 +34,8 @@ const TBody = ({
             {cells.map((cell, cellIndex) => (
               <TD
                 cell={cell}
+                index={cellIndex}
+                cells={cells}
                 rowSize={rowSize}
                 backgroundColor={(rowIndex % 2 === 0) ? evenRowBGColor : oddRowBGColor}
                 isRowSelected={isSelectable && (row.getCanExpand() ? row.getIsAllSubRowsSelected() : row.getIsSelected())}

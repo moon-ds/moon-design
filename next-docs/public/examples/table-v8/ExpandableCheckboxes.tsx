@@ -283,19 +283,23 @@ const Example = () => {
           header: () => 'Age',
           accessorKey: 'age',
           cell: props => (props.getValue()),
+          size: 30,
         },
         {
           header: () => 'Visits',
           accessorKey: 'visits',
           cell: props => (props.getValue()),
+          size: 60,
         },
         {
           header: () => 'Activity',
           accessorKey: 'activity',
+          size: 80,
         },
         {
           header: () => 'Status',
           accessorKey: 'status',
+          size: 80,
         },
         {
           header: () => 'Profile Progress',
@@ -312,6 +316,7 @@ const Example = () => {
           header: () => 'Actions',
           accessorKey: 'actions',
           cell: props => (props.getValue()),
+          size: 80,
         }
       ],
     }

@@ -5,6 +5,8 @@ import RowSizes from "./RowSizes";
 
 type TDProps = {
   cell: Cell<{}, unknown>;
+  index: number;
+  cells: Cell<{}, unknown>[];
   selectable?: boolean;
   /* isExpanded?: boolean; */
   /* isLastRow?: boolean; */

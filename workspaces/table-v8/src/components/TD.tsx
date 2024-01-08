@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { mergeClassnames } from "@heathmont/moon-core-tw";
-import { flexRender } from "@tanstack/react-table";
+import { flexRender, Cell } from "@tanstack/react-table";
 import styled from "styled-components";
 import ClipProps from "../private/types/ClipProps";
 import StickyColumn from "../private/types/StickyColumn";
@@ -8,10 +8,29 @@ import TDProps from "../private/types/TDProps";
 import getFontSize from "../private/utils/getFontSize";
 import getPadding from "../private/utils/getPadding";
 
+const getStickyShift = (cells: Cell<{}, unknown>[], index: number, stickySide?: string,) => {
+  let shift = 0;
+  if (stickySide === 'left') {
+    for (let i = 0; i < index; i++) {
+      shift += +(cells[i].column.columnDef.size || 0);
+    }
+    return shift;
+  }
+
+  if (stickySide === 'right') {
+    for (let i = cells.length - 1; i > +index; i--) {
+      shift += +(cells[i].column.columnDef.size || 0);
+    }
+    return shift;
+  }
+}
+
 const TD = forwardRef<HTMLTableCellElement, TDProps>(
 (
   {
     cell,
+    index,
+    cells,
     rowSize,
     backgroundColor,
     isFirstColumn,
@@ -26,8 +45,8 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
   const stickySide = stickyColumn.sticky;
   const stickyShift = stickySide
       ? stickySide === 'left'
-        ? `left: ${columnData ? columnData?.left : (cell.column.columnDef as StickyColumn).left}px`
-        : `right: ${columnData ? columnData?.right : (cell.column.columnDef as StickyColumn).right}px`
+        ? `left: ${columnData ? columnData?.left : getStickyShift(cells, index, 'left')}px`
+        : `right: ${columnData ? columnData?.right : getStickyShift(cells, index, 'right')}px`
       : undefined;
 
   const BodyCell = styled.td`
