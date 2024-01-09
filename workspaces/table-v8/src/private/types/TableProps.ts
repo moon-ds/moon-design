@@ -14,6 +14,7 @@ type TableProps<D extends object = {}> = {
   data: D[];
   defaultColumn?: Partial<ColumnDef<{}, unknown>> | undefined;
   state?: Partial<TableState> | undefined;
+  withFooter?: boolean;
   width?: string | number | undefined;
   height?: string | number | undefined;
   maxWidth?: string | number | undefined;

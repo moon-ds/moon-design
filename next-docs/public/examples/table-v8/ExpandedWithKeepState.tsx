@@ -75,7 +75,7 @@ const Example = () => {
     () => [
       {
         header: 'Name',
-        footer: props => props.column.id,
+        footer: props => 'Name',
         columns: [
           {
             accessorKey: 'firstName',
@@ -113,7 +113,6 @@ const Example = () => {
                 </>
               </div>
             ),
-            footer: props => props.column.id,
           },
           {
             accessorFn: (row: Person) => row.lastName,
@@ -125,7 +124,7 @@ const Example = () => {
       },
       {
         header: 'Info',
-        footer: props => props.column.id,
+        footer: props => 'Info',
         columns: [
           {
             accessorKey: 'age',
@@ -153,6 +152,7 @@ const Example = () => {
       {
         id: 'actions',
         header: () => 'Actions',
+        footer: props => 'Actions',
         columns: [
           {
             header: () => 'Actions',
@@ -186,6 +186,7 @@ const Example = () => {
       state={{ expanded }}
       getSubRows={getSubRows}
       onExpandedChange={setExpanded}
+      withFooter={true}
     />
   )
 };

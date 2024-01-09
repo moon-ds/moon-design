@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { mergeClassnames } from "@heathmont/moon-core-tw";
 import {
-  RowData,
   getCoreRowModel,
   getExpandedRowModel,
   useReactTable
 } from "@tanstack/react-table";
 import TableWrapper from "./TableWrapper";
 import TBody from "./TBody";
+import TFoot from "./TFoot";
 import THead from "./THead";
 import ColumnData from "../private/types/ColumnData";
 import TableProps from "../private/types/TableProps";
@@ -22,6 +22,7 @@ const Table = ({
   maxWidth,
   maxHeight,
   state,
+  withFooter = false,
   headerBackgroundColor = 'bg-gohan',
   defaultRowBackgroundColor = 'bg-goku',
   evenRowBackgroundColor = 'bg-goku',
@@ -100,6 +101,14 @@ const Table = ({
             columnMap={columnMap}
             textClip={textClip}
           />
+          {withFooter &&
+            <TFoot
+              table={table}
+              backgroundColor={headerBackgroundColor}
+              rowSize={rowSize}
+              rowGap={rowGap}
+            />
+          }
         </table>
       </TableWrapper>
   )};
