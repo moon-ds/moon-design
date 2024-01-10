@@ -7,8 +7,8 @@ type TFootProps = {
   backgroundColor?: string;
   rowGap?: string | undefined;
   rowSize?: RowSizes;
-  /* isSticky?: boolean;
-  columnMap?: ColumnData[][]; */
+  isSticky?: boolean;
+  columnMap?: ColumnData[][];
 };
 
 export default TFootProps;

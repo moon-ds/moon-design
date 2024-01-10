@@ -181,7 +181,7 @@ const Example = () => {
       columns={columns}
       data={data}
       width={800}
-      height={400}
+      height={600}
       layout='stretched-auto'
       state={{ expanded }}
       getSubRows={getSubRows}

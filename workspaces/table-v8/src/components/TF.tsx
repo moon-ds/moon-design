@@ -14,7 +14,14 @@ const TF = forwardRef<HTMLTableCellElement, THProps>(
   },
   ref
 ) => {
-  const stickyColumn: StickyColumn = header.column.parent ? header.column.parent?.columnDef : header.column.columnDef;
+  const columnDefinition = header.column.columnDef;
+  const footerValue = columnDefinition.footer
+    ? (typeof columnDefinition.footer === 'function'
+      ? columnDefinition.footer(header.getContext())
+      : columnDefinition.footer)
+    : undefined;
+
+  const stickyColumn: StickyColumn = header.column.parent ? header.column.parent?.columnDef : columnDefinition;
   const stickySide = stickyColumn.sticky;
 
   return (
@@ -29,10 +36,13 @@ const TF = forwardRef<HTMLTableCellElement, THProps>(
     >
       {header.isPlaceholder ? null : (
           <div
+            style={{
+              fontWeight: 'bold',
+            }}
             className={mergeClassnames(
-              'relative text-start font-meduim',
+              'relative text-start',
               getFontSize(rowSize),
-              getPadding(rowSize)
+              footerValue && getPadding(rowSize)
             )}
           >
             {flexRender(

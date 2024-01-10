@@ -107,6 +107,8 @@ const Table = ({
               backgroundColor={headerBackgroundColor}
               rowSize={rowSize}
               rowGap={rowGap}
+              isSticky={isSticky}
+              columnMap={columnMap}
             />
           }
         </table>
