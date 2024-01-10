@@ -25,6 +25,8 @@ const TFoot = ({
     }
   `;
 
+  const cmLength = columnMap?.length || 0;
+
   return (
     isSticky ? (
       <Foot
@@ -39,7 +41,7 @@ const TFoot = ({
                 header={header}
                 backgroundColor={backgroundColor}
                 rowSize={rowSize}
-                columnData={columnMap && columnMap[indexFG][index]}
+                columnData={columnMap && columnMap[cmLength - indexFG - 1][index]}
               />
             )}
           </tr>

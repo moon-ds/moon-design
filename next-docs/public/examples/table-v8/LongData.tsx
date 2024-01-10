@@ -20,8 +20,8 @@ const Example = () => {
     {
       id: 'operation',
       header: () => 'Transactions',
+      footer: () => 'Transactions',
       sticky: 'left',
-      left: '0',
       columns: [
         {
           header: () => 'Transaction UUID',
@@ -38,6 +38,7 @@ const Example = () => {
     {
       id: 'info',
       header: () => 'Info',
+      footer: () => 'Info',
       columns: [
         {
           header: () => 'Process time',
@@ -61,8 +62,8 @@ const Example = () => {
     {
       id: 'status',
       header: () => 'Status',
+      footer: () => 'Status',
       sticky: 'right',
-      right: '0',
       columns: [
         {
           header: () => 'Currency',
@@ -110,9 +111,10 @@ const Example = () => {
       data={data}
       defaultColumn={defaultColumn}
       width={800}
-      height={400}
+      height={500}
       textClip={textClip}
       layout="auto"
+      withFooter={true}
     />
   );
 }
