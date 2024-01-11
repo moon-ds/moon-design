@@ -7,6 +7,7 @@ type THProps = {
   header: Header<{}, unknown>;
   isLastColumn?: boolean;
   rowSize?: RowSizes;
+  rowGap?: string | undefined;
   isCellBorder?: boolean;
   onClick?: (e: any) => void;
   columnData?: ColumnData;

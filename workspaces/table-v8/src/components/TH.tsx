@@ -31,6 +31,7 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
       header,
       isLastColumn,
       rowSize,
+      rowGap,
       isCellBorder,
       columnData,
       onClick
@@ -39,11 +40,24 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
   ) => {
     const stickyColumn: StickyColumn = header.column.parent ? header.column.parent?.columnDef : header.column.columnDef;
     const stickySide = stickyColumn.sticky;
+
     const stickyShift = stickySide
       ? stickySide === 'left'
         ? `left: ${columnData ? columnData?.left : getStickyShift(header, 'left')}px;`
         : `right: ${columnData ? columnData?.right : getStickyShift(header, 'right')}px;`
       : undefined;
+
+    const stickyBefore = `
+      &::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: calc(100% + 1px);
+        height: 100%;
+        background-color: rgb(var(--${backgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
+      };
+    `;
 
     const HeadCell = styled.th`
       z-index: 1;
@@ -51,6 +65,7 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
       min-width: ${stickySide ? header.column.columnDef.size : header.column.columnDef.minSize}px;
       max-width: ${stickySide ? header.column.columnDef.size : header.column.columnDef.maxSize}px;
       ${stickyShift && stickyShift}
+      ${stickySide && stickyBefore}
     `;
 
     return (

@@ -43,10 +43,11 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
 ) => {
   const stickyColumn: StickyColumn = cell.column.parent ? cell.column.parent?.columnDef : cell.column.columnDef;
   const stickySide = stickyColumn.sticky;
+
   const stickyShift = stickySide
       ? stickySide === 'left'
-        ? `left: ${columnData ? columnData?.left : getStickyShift(cells, index, 'left')}px`
-        : `right: ${columnData ? columnData?.right : getStickyShift(cells, index, 'right')}px`
+        ? `left: ${columnData ? columnData?.left : getStickyShift(cells, index, 'left')}px;`
+        : `right: ${columnData ? columnData?.right : getStickyShift(cells, index, 'right')}px;`
       : undefined;
 
   const BodyCell = styled.td`
@@ -60,7 +61,7 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
     <BodyCell
       key={cell.id}
       className={mergeClassnames(
-        /*'relative */'box-border text-start',
+        'box-border text-start',
         (textClip === ('clip' as ClipProps)) && 'break-all truncate',
         (textClip === ('break' as ClipProps)) && 'break-all text-clip',
         getFontSize(rowSize),

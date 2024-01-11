@@ -25,11 +25,13 @@ const Example = () => {
       columns: [
         {
           header: () => 'Transaction UUID',
+          footer: () => 'Transaction UUID',
           accessorKey: 'uuid',
           size: '150',
         },
         {
           header: () => 'User & Supplier user',
+          footer: () => 'User & Supplier user',
           accessorKey: 'user',
           size: '150',
         },
@@ -42,19 +44,23 @@ const Example = () => {
       columns: [
         {
           header: () => 'Process time',
-          accessorKey: 'processTime'
+          accessorKey: 'processTime',
+          footer: () => 'Process time',
         },
         {
           header: () => 'Client',
-          accessorKey: 'client'
+          accessorKey: 'client',
+          footer: () => 'Client',
         },
         {
           header: () => 'Game name & provider',
-          accessorKey: 'gameNameAndProvider'
+          accessorKey: 'gameNameAndProvider',
+          footer: () => 'Game name & provider',
         },
         {
           header: () => 'Amount',
-          accessorKey: 'amount'
+          accessorKey: 'amount',
+          footer: () => 'Amount',
         },
 
       ],
@@ -67,12 +73,14 @@ const Example = () => {
       columns: [
         {
           header: () => 'Currency',
+          footer: () => 'Currency',
           accessorKey: 'currency',
           cell: props => (props.getValue()),
           size: '90',
         },
         {
           header: () => 'Status',
+          footer: () => 'Status',
           accessorKey: 'status',
           cell: props => (props.getValue()),
           size: '90',
