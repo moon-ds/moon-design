@@ -4,7 +4,7 @@ import TableWrapperProps from "../private/types/TableWrapperProps";
 
 const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
   (
-    { style, className, children, tableWrapperRef }
+    { style, className, children, container, tableWrapperRef }
   ) => {
     const kbDelta = 132;
     const [isFocused, setIsFocused] = useState(false);
@@ -26,6 +26,16 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
       }
     }, [isLocked, setIsLocked]);
 
+    const calcMaxScrollByX = (target: HTMLDivElement, shift: number, containerWidth?: number | string) => {
+      const scrollRange = (container && containerWidth) ? (target.scrollWidth - +containerWidth) : 0;
+      const dX = target.scrollLeft + shift;
+      return (dX < 0)
+        ? -target.scrollLeft
+        : (dX >= scrollRange)
+          ? scrollRange - target.scrollLeft - 1
+          : shift;
+    }
+
     const handleKbDown = useCallback((evt: React.KeyboardEvent<HTMLDivElement>) => {
       if (isFocused) {
         const kbDeltas = { x: 0, y: 0 };
@@ -35,7 +45,7 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
             case "ArrowUp": kbDeltas.y = -kbDelta; break;
             case "ArrowDown": kbDeltas.y = kbDelta; break;
             case "ArrowLeft": kbDeltas.x = -kbDelta; break;
-            case "ArrowRight": kbDeltas.x = kbDelta; break;
+            case "ArrowRight": kbDeltas.x = calcMaxScrollByX(evt.currentTarget, kbDelta, container?.width); break;
           }
 
           if (!isLocked) {

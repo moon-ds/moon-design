@@ -40,7 +40,7 @@ const TBody = ({
                 backgroundColor={(rowIndex % 2 === 0) ? evenRowBGColor : oddRowBGColor}
                 isRowSelected={isSelectable && (row.getCanExpand() ? row.getIsAllSubRowsSelected() : row.getIsSelected())}
                 isFirstColumn={cellIndex === 0}
-                isLastColumn={cellIndex === cells.length - 1}
+                isLastColumn={cellIndex === (cells.length - 1)}
                 columnData={columnMap && columnMap[columnMap.length - 1][cellIndex]}
                 textClip={textClip}
               />

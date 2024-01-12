@@ -50,11 +50,30 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
         : `right: ${columnData ? columnData?.right : getStickyShift(cells, index, 'right')}px;`
       : undefined;
 
+  /* TODO: I don`t get why an expression at line 66 doesn`t work */
+  const stickyBefore = `
+    &::before {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      right: -1px;
+      height: 100%;
+      z-index: -1;
+      background-color: rgb(var(--${backgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
+      ${isFirstColumn && 'border-top-left-radius: 8px;'}
+      ${isFirstColumn && 'border-bottom-left-radius: 8px;'}
+      ${isLastColumn && 'border-top-right-radius: 8px;'}
+      ${isLastColumn && 'border-bottom-right-radius: 8px;'}
+    };
+  `;
+
   const BodyCell = styled.td`
     width: ${cell.column.columnDef.size}px;
     min-width: ${stickySide ? cell.column.columnDef.size : cell.column.columnDef.minSize}px;
     max-width: ${stickySide ? cell.column.columnDef.size : cell.column.columnDef.maxSize}px;
     ${stickyShift && stickyShift}
+    ${stickySide && stickyBefore}
   `;
 
   return (
@@ -62,8 +81,6 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
       key={cell.id}
       className={mergeClassnames(
         'box-border text-start',
-        (textClip === ('clip' as ClipProps)) && 'break-all truncate',
-        (textClip === ('break' as ClipProps)) && 'break-all text-clip',
         getFontSize(rowSize),
         getPadding(rowSize),
         isRowSelected ? 'bg-heles' : backgroundColor,
@@ -73,10 +90,23 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
       )}
       ref={ref}
     >
-      {flexRender(
-        cell.column.columnDef.cell,
-        cell.getContext()
-      )}
+      {textClip ? (
+          <div
+            className={mergeClassnames(
+              (textClip === ('clip' as ClipProps)) && 'break-all truncate',
+              (textClip === ('break' as ClipProps)) && 'break-all text-clip',
+            )}
+          >
+            {flexRender(
+              cell.column.columnDef.cell,
+              cell.getContext()
+            )}
+          </div>
+        ) : flexRender(
+          cell.column.columnDef.cell,
+          cell.getContext()
+        )
+      }
     </BodyCell>
 )});
 

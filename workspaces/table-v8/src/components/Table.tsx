@@ -71,6 +71,7 @@ const Table = ({
         className={mergeClassnames(
           isSticky && 'overflow-hidden'
         )}
+        container={{ width, height }}
         tableWrapperRef={tableWrapperRef}
       >
         <table
