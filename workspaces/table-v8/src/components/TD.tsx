@@ -33,6 +33,7 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
     cells,
     rowSize,
     backgroundColor,
+    bodyBackgroundColor,
     isFirstColumn,
     isLastColumn,
     isRowSelected = false,
@@ -50,8 +51,7 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
         : `right: ${columnData ? columnData?.right : getStickyShift(cells, index, 'right')}px;`
       : undefined;
 
-  /* TODO: I don`t get why an expression at line 66 doesn`t work */
-  const stickyBefore = `
+  const stickyPad = `
     &::before {
       position: absolute;
       content: "";
@@ -60,11 +60,21 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
       right: -1px;
       height: 100%;
       z-index: -1;
+      background-color: rgb(var(--${bodyBackgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
+    };
+    &::after {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      right: -1px;
+      height: 100%;
+      z-index: -1;
       background-color: rgb(var(--${backgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
-      ${isFirstColumn && 'border-top-left-radius: 8px;'}
-      ${isFirstColumn && 'border-bottom-left-radius: 8px;'}
-      ${isLastColumn && 'border-top-right-radius: 8px;'}
-      ${isLastColumn && 'border-bottom-right-radius: 8px;'}
+      border-top-left-radius: ${isFirstColumn ? '8px' : '0'};
+      border-top-right-radius: ${isLastColumn ? '8px' : '0'};
+      border-bottom-right-radius: ${isLastColumn ? '8px' : '0'};
+      border-bottom-left-radius: ${isFirstColumn ? '8px' : '0'};
     };
   `;
 
@@ -73,7 +83,7 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
     min-width: ${stickySide ? cell.column.columnDef.size : cell.column.columnDef.minSize}px;
     max-width: ${stickySide ? cell.column.columnDef.size : cell.column.columnDef.maxSize}px;
     ${stickyShift && stickyShift}
-    ${stickySide && stickyBefore}
+    ${stickySide && stickyPad}
   `;
 
   return (

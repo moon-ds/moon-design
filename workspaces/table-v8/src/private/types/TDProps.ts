@@ -18,7 +18,7 @@ type TDProps = {
   isFirstColumn?: boolean;
   isLastColumn?: boolean;
   /* isHovered?: boolean; */
-  /* headerBackgroundColor?: string; */
+  bodyBackgroundColor?: string;
   onClick?: () => void;
   rowSize?: RowSizes;
   isRowSelected?: boolean;

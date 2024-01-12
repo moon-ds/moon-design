@@ -9,6 +9,7 @@ const TBody = ({
   rowSize,
   isSelectable = false,
   columnMap,
+  backgroundColor,
   defaultRowBackgroundColor,
   evenRowBackgroundColor,
   textClip,
@@ -20,6 +21,7 @@ const TBody = ({
     <tbody>
       {table.getRowModel().rows.map((row, rowIndex) => {
         const cells = row.getVisibleCells();
+        const lastIndex = cells.length - 1;
         return (
           <tr
             key={row.id}
@@ -38,9 +40,10 @@ const TBody = ({
                 cells={cells}
                 rowSize={rowSize}
                 backgroundColor={(rowIndex % 2 === 0) ? evenRowBGColor : oddRowBGColor}
+                bodyBackgroundColor={backgroundColor}
                 isRowSelected={isSelectable && (row.getCanExpand() ? row.getIsAllSubRowsSelected() : row.getIsSelected())}
                 isFirstColumn={cellIndex === 0}
-                isLastColumn={cellIndex === (cells.length - 1)}
+                isLastColumn={cellIndex === lastIndex}
                 columnData={columnMap && columnMap[columnMap.length - 1][cellIndex]}
                 textClip={textClip}
               />

@@ -8,6 +8,7 @@ type TBodyProps = {
   rowGap?: string;
   rowSize: RowSizes;
   isSelectable?: boolean;
+  backgroundColor?: string;
   defaultRowBackgroundColor?: string;
   evenRowBackgroundColor?: string;
   columnMap?: ColumnData[][];

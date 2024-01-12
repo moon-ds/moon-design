@@ -24,6 +24,7 @@ const Table = ({
   state,
   withFooter = false,
   headerBackgroundColor = 'bg-gohan',
+  bodyBackgroundColor = 'bg-gohan',
   defaultRowBackgroundColor = 'bg-goku',
   evenRowBackgroundColor = 'bg-goku',
   rowGap = '2px',
@@ -97,6 +98,7 @@ const Table = ({
             rowGap={rowGap}
             rowSize={rowSize}
             isSelectable={isSelectable}
+            backgroundColor={bodyBackgroundColor}
             defaultRowBackgroundColor={defaultRowBackgroundColor}
             evenRowBackgroundColor={evenRowBackgroundColor}
             columnMap={columnMap}
