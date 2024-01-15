@@ -22,9 +22,7 @@ import ExpandableCheckboxes from '../../public/examples/table-v8/ExpandableCheck
 import ExpandedRows from '../../public/examples/table/ExpandedRows';
 */
 import ExpandedWithKeepState from '../../public/examples/table-v8/ExpandedWithKeepState';
-/*
-import ExtraLongDataView from '../../public/examples/table/ExtraLongDataView';
-*/
+import ExtraLongData from '../../public/examples/table-v8/ExtraLongData';
 import LongData from '../../public/examples/table-v8/LongData';
 /*
 import MiniMap from '../../public/examples/table/MiniMap';
@@ -179,11 +177,13 @@ const PageTable = () => {
         preview={<CustomColumnWidths />}
         code={examples ? examples.CustomColumnWidths : 'Loading'}
       />
+*/}
       <Preview
         title="Extra long data viewing"
-        preview={<ExtraLongDataView />}
-        code={examples ? examples.ExtraLongDataView : 'Loading'}
+        preview={<ExtraLongData />}
+        code={examples ? examples.ExtraLongData : 'Loading'}
       />
+  {/*
       <PropsTable
         title="Table props"
         data={[
