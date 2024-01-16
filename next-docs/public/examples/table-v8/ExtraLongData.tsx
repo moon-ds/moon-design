@@ -1,6 +1,6 @@
 import { Chip, Tag, Tooltip } from "@heathmont/moon-core-tw";
 import { Other3DotsHorizontal, TimeCalendarDate } from "@heathmont/moon-icons-tw";
-import { Table } from "@heathmont/moon-table-v8-tw";
+import { CellScroller, Table } from "@heathmont/moon-table-v8-tw";
 import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
 
@@ -106,11 +106,7 @@ const Example = () => {
       );
     });
 
-    return (
-      <div className="px-3 py-2 text-moon-14 flex items-center overflow-x-auto outline-none">
-        {deals}
-      </div>
-    );
+    return deals;
   };
 
   const data = React.useMemo(() => [
@@ -132,7 +128,7 @@ const Example = () => {
     },
     {
       location: 'Europe',
-      deals: rearrangeData([{'10.0': { start: '10000', end: '20000' }}, {'9.0': { start: '20000', end: '30000' }}, {'8.0': { start: '30000', end: '40000' }}, {'7.0': { start: '40000', end: '50000' }}, {'6.0': { start: '50000', end: '60000' }}]),
+      deals: <CellScroller data={rearrangeData([{'10.0': { start: '10000', end: '20000' }}, {'9.0': { start: '20000', end: '30000' }}, {'8.0': { start: '30000', end: '40000' }}, {'7.0': { start: '40000', end: '50000' }}, {'6.0': { start: '50000', end: '60000' }}])}></CellScroller>,
       daterange: <Chip size="sm" className="bg-transparent" iconLeft={<TimeCalendarDate className="text-moon-24" />}>23.10.01 - 23.10.31</Chip>,
       amount: 22.97,
       currency: <Tag className="bg-gray-100 text-lg text-gray-600 max-w-fit">USD</Tag>,
@@ -140,7 +136,7 @@ const Example = () => {
     },
     {
       location: 'Europe',
-      deals: rearrangeData([{'5.0': { start: '2', end: '3' }}]),
+      deals: <CellScroller data={rearrangeData([{'5.0': { start: '2', end: '3' }}])}></CellScroller>,
       daterange: <Chip size="sm" className="bg-transparent" iconLeft={<TimeCalendarDate className="text-moon-24" />}>23.12.01 -</Chip>,
       amount: 22.97,
       currency: <Tag className="bg-gray-100 text-lg text-gray-600 max-w-fit">USD</Tag>,
@@ -148,7 +144,7 @@ const Example = () => {
     },
     {
       location: 'Europe',
-      deals: rearrangeData([{'0.0': { start: '0' }}]),
+      deals: <CellScroller data={rearrangeData([{'0.0': { start: '0' }}])}></CellScroller>,
       daterange: <Chip size="sm" className="bg-transparent" iconLeft={<TimeCalendarDate className="text-moon-24" />}>23.11.01 - 23.11.30</Chip>,
       amount: 22.97,
       currency: <Tag className="bg-gray-100 text-lg text-gray-600 max-w-fit">USD</Tag>,
@@ -156,7 +152,7 @@ const Example = () => {
     },
     {
       location: 'Asia',
-      deals: rearrangeData([{'6.0': { start: '3', end: '4' }}]),
+      deals: <CellScroller data={rearrangeData([{'6.0': { start: '3', end: '4' }}])}></CellScroller>,
       daterange: <Chip size="sm" className="bg-transparent" iconLeft={<TimeCalendarDate className="text-moon-24" />}>23.11.01 -</Chip>,
       amount: 22.97,
       currency: <Tag className="bg-gray-100 text-lg text-gray-600 max-w-fit">USD</Tag>,
@@ -164,7 +160,7 @@ const Example = () => {
     },
     {
       location: 'Asia',
-      deals: rearrangeData([{'5.0': { start: '0', end: '150000' }}, {'4.0': { start: '150000', end: '500000' }}]),
+      deals: <CellScroller data={rearrangeData([{'5.0': { start: '0', end: '150000' }}, {'4.0': { start: '150000', end: '500000' }}])}></CellScroller>,
       daterange: <Chip size="sm" className="bg-transparent" iconLeft={<TimeCalendarDate className="text-moon-24" />}>23.05.01 - 23.10.31</Chip>,
       amount: 22.97,
       currency: <Tag className="bg-gray-100 text-lg text-gray-600 max-w-fit">USD</Tag>,
