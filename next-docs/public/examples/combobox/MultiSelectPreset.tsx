@@ -30,8 +30,10 @@ const Example = () => {
   const [query, setQuery] = useState<string>('');
   const filteredPeople = filter(query, people);
 
+  const presetIndexes = [3, 5];
+
   useEffect(() => {
-    const initialValue = people.filter(item => (Math.random() < .5)) as never[];
+    const initialValue = presetIndexes.map(presetIndex => people[presetIndex]) as never[];
 
     if (initialValue.length) {
       setSelected(initialValue);
