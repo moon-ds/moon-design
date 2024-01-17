@@ -67,9 +67,9 @@ const Table = ({
           height,
           maxWidth,
           maxHeight,
-          scrollBehavior: 'smooth',
         }}
         className={mergeClassnames(
+          'scroll-smooth',
           isSticky && 'overflow-hidden'
         )}
         container={{ width, height }}
@@ -82,7 +82,7 @@ const Table = ({
           }}
           className={mergeClassnames(
             'border-separate',
-            layout === 'auto' ? '' : 'w-full'
+            layout !== 'auto' && 'w-full'
           )}
         >
           <THead
