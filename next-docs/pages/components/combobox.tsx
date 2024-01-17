@@ -12,6 +12,7 @@ import InsetSelectStates from '../../public/examples/combobox/InsetSelectStates'
 import LongNameOptions from '../../public/examples/combobox/LongNameOptions';
 import MultiAllSelect from '../../public/examples/combobox/MultiAllSelect';
 import MultiSelect from '../../public/examples/combobox/MultiSelect';
+import MultiSelectPreset from '../../public/examples/combobox/MultiSelectPreset';
 import Select from '../../public/examples/combobox/Select';
 import SelectStates from '../../public/examples/combobox/SelectStates';
 import VisualMultiSelect from '../../public/examples/combobox/VisualMultiSelect';
@@ -118,6 +119,12 @@ const PageCombobox = () => {
         title="MultiSelect"
         preview={<MultiSelect />}
         code={examples ? examples.MultiSelect : 'Loading'}
+      />
+
+      <Preview
+        title="MultiSelect with data preset"
+        preview={<MultiSelectPreset />}
+        code={examples ? examples.MultiSelectPreset : 'Loading'}
       />
 
       <Preview
