@@ -53,18 +53,11 @@ const TF = forwardRef<HTMLTableCellElement, THProps>(
 
   const stickyBefore = `
       &::before {
-        position: absolute;
-        content: "";
-        top: 0;
-        left: 0;
-        width: calc(100% + 1px);
-        height: 100%;
         background-color: rgb(var(--${backgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
       };
     `;
 
   const FootCell = styled.th`
-    z-index: 1;
     width: ${header.column.columnDef.size}px;
     min-width: ${stickySide ? columnDefinition.size : columnDefinition.minSize}px;
     max-width: ${stickySide ? columnDefinition.size : columnDefinition.maxSize}px;
@@ -77,8 +70,9 @@ const TF = forwardRef<HTMLTableCellElement, THProps>(
       key={header.id}
       colSpan={header.colSpan}
       className={mergeClassnames(
+        'z-[1]',
         backgroundColor && backgroundColor,
-        stickySide && 'sticky',
+        stickySide && 'sticky before:absolute before:top-0 before:left-0 before:w-[calc(100%+1px)] before:h-full',
       )}
       ref={ref}
     >

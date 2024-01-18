@@ -16,11 +16,7 @@ const TFoot = ({
   const Foot = styled.tfoot`
     bottom: ${bottom};
     &::before {
-      position: absolute;
-      content: "";
       bottom: -${bottom};
-      width: 100%;
-      height: 100%;
       background-color: rgb(var(--${backgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
     }
   `;
@@ -31,7 +27,8 @@ const TFoot = ({
     isSticky ? (
       <Foot
         className={mergeClassnames(
-          isSticky && "sticky z-1",
+          'sticky z-[1]',
+          'before:absolute before:w-full before:h-full'
         )}
       >
         {table.getFooterGroups().map((footerGroup, indexFG) => (

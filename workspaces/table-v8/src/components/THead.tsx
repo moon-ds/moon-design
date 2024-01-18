@@ -16,11 +16,7 @@ const THead = ({
   const Head = styled.thead`
     top: ${top};
     &::before {
-      position: absolute;
-      content: "";
       top: -${top};
-      width: 100%;
-      height: 100%;
       background-color: rgb(var(--${backgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
     }
   `;
@@ -29,7 +25,7 @@ const THead = ({
     isSticky ? (
       <Head
         className={mergeClassnames(
-          isSticky && "sticky z-1",
+          'sticky z-[1] before:absolute before:w-full before:h-full',
         )}
       >
         {table.getHeaderGroups().map((headerGroup, indexHG) => (

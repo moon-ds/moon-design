@@ -53,28 +53,10 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
 
   const stickyPad = `
     &::before {
-      position: absolute;
-      content: "";
-      top: 0;
-      left: 0;
-      right: -1px;
-      height: 100%;
-      z-index: -1;
       background-color: rgb(var(--${bodyBackgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
     };
     &::after {
-      position: absolute;
-      content: "";
-      top: 0;
-      left: 0;
-      right: -1px;
-      height: 100%;
-      z-index: -1;
       background-color: rgb(var(--${backgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
-      border-top-left-radius: ${isFirstColumn ? '8px' : '0'};
-      border-top-right-radius: ${isLastColumn ? '8px' : '0'};
-      border-bottom-right-radius: ${isLastColumn ? '8px' : '0'};
-      border-bottom-left-radius: ${isFirstColumn ? '8px' : '0'};
     };
   `;
 
@@ -94,9 +76,11 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
         getFontSize(rowSize),
         getPadding(rowSize),
         isRowSelected ? 'bg-heles' : backgroundColor,
-        isFirstColumn && 'rounded-s-lg',
-        isLastColumn && 'rounded-e-lg',
-        stickySide && 'sticky',
+        isFirstColumn && 'rounded-s-lg after:rounded-s-lg',
+        isLastColumn && 'rounded-e-lg after:rounded-e-lg',
+        stickySide && 'sticky before:-z-[1] after:-z-[1]',
+        stickySide && 'before:absolute before:top-0 before:left-0 before:-right-[1px] before:h-full',
+        stickySide && 'after:absolute after:top-0 after:left-0 after:-right-[1px] after:h-full',
       )}
       ref={ref}
     >
