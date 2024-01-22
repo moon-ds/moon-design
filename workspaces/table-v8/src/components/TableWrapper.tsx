@@ -12,24 +12,25 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
   ({ style, className, children, container, tableWrapperRef }) => {
     const kbDelta = 132;
     const [isFocused, setIsFocused] = useState(false);
-    const [isLocked, setIsLocked] = useState(false);
+    const [isListenKbRepeatLocked, setIsListenKbRepeatLocked] = useState(false);
 
-    const resetLockState = useCallback(() => {
-      setIsLocked(false);
-    }, [setIsLocked]);
+    const resetLockKbListenRepeatState = useCallback(() => {
+      setIsListenKbRepeatLocked(false);
+    }, [setIsListenKbRepeatLocked]);
 
     const handleWheel = useCallback(
       (e: globalThis.WheelEvent) => {
         const event = e as unknown as WheelEvent<HTMLDivElement>;
         if ((event.target as HTMLElement).closest("thead") !== null) return;
         event.preventDefault();
-        if (!isLocked) {
-          setIsLocked(true);
-          setTimeout(resetLockState, 45);
-          event.currentTarget.scrollBy(0, event.deltaY);
+        if (isListenKbRepeatLocked) {
+          return;
         }
+        setIsListenKbRepeatLocked(true);
+        setTimeout(resetLockKbListenRepeatState, 45);
+        event.currentTarget.scrollBy(0, event.deltaY);
       },
-      [isLocked, setIsLocked],
+      [isListenKbRepeatLocked, setIsListenKbRepeatLocked],
     );
 
     const calcMaxScrollByX = (
@@ -49,7 +50,7 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
 
     const handleKbDown = useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if (!isFocused || isLocked) {
+        if (!isFocused) {
           return;
         }
 
@@ -63,13 +64,17 @@ const TableWrapper = forwardRef<HTMLDivElement, TableWrapperProps>(
 
         if (navigationKeys.has(event.code)) {
           event.preventDefault();
+          if (isListenKbRepeatLocked) {
+            return;
+          }
+
+          setIsListenKbRepeatLocked(true);
+          setTimeout(resetLockKbListenRepeatState, 82);
           navigationKeys.get(event.code)();
-          setIsLocked(true);
-          setTimeout(resetLockState, 82);
           event.currentTarget.scrollBy(kbDeltas.x, kbDeltas.y);
         }
       },
-      [isFocused, isLocked, setIsLocked],
+      [isFocused, isListenKbRepeatLocked, setIsListenKbRepeatLocked],
     );
 
     useEffect(() => {

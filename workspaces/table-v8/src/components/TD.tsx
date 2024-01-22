@@ -22,7 +22,7 @@ const getStickyShift = (
   }
 
   if (stickySide === 'left') {
-    return calculateShift(0, index, 1);
+    return calculateShift(0, +index, 1);
   }
 
   if (stickySide === 'right') {
@@ -59,13 +59,13 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
       : undefined;
 
     const stickyPad = `
-    &::before {
-      background-color: rgb(var(--${bodyBackgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
-    };
-    &::after {
-      background-color: rgb(var(--${backgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
-    };
-  `;
+      &::before {
+        background-color: rgb(var(--${bodyBackgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
+      };
+      &::after {
+        background-color: rgb(var(--${backgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
+      };
+    `;
 
     const BodyCell = styled.td`
       width: ${cell.column.columnDef.size}px;

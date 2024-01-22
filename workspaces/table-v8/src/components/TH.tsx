@@ -9,7 +9,7 @@ import getPadding from "../private/utils/getPadding";
 
 const getStickyShift = (header: Header<{}, unknown>, stickySide: string) => {
   const { headers } = header.headerGroup;
-  const headerIndex = +header.index; //parse once for optimization
+  const headerIndex = +header.index;
 
   const calculateShift = (start: number, end: number, isIncrementing: boolean) => {
     let shift = 0;
@@ -25,7 +25,7 @@ const getStickyShift = (header: Header<{}, unknown>, stickySide: string) => {
       return calculateShift(0, headerIndex, true);
     case 'right':
       return calculateShift(headers.length - 1, headerIndex, false);
-    default: //default case if stickySide is not 'left' or 'right' to prevent silent failure
+    default:
       return 0;
   }
 };
