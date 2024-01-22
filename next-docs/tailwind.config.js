@@ -6,6 +6,7 @@ module.exports = {
     './node_modules/@heathmont/moon-core-tw/**/*.{js,ts,jsx,tsx}',
     './node_modules/@heathmont/moon-cmdk-tw/**/*.{js,ts,jsx,tsx}',
     './node_modules/@heathmont/moon-table-tw/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@heathmont/moon-table-v8-tw/**/*.{js,ts,jsx,tsx}',
   ],
   presets: [
     require('@heathmont/moon-core-tw/src/private/presets/ds-moon-preset'),
