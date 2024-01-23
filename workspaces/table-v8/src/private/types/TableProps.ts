@@ -6,10 +6,11 @@ import {
   TableState,
 } from "@tanstack/react-table";
 import ClipProps from "./ClipProps";
+import DataHelper from "./DataHelper";
 import RowSizes from "./RowSizes";
 import TableLayouts from "./TableLayouts";
 
-type TableProps<D extends unknown = {}> = {
+type TableProps<D extends DataHelper = DataHelper> = {
   columns: ColumnDef<D, any>[];
   data: D[];
   defaultColumn?: Partial<ColumnDef<D, any>>;
@@ -29,7 +30,7 @@ type TableProps<D extends unknown = {}> = {
   isSelectable?: boolean;
   textClip?: ClipProps;
   layout?: TableLayouts;
-  getSubRows?: (originalRow: any, index: number) => any[] | undefined;
+  getSubRows?: (originalRow: D, index: number) => D[] | undefined;
   onExpandedChange?: OnChangeFn<ExpandedState>;
   onRowSelectionChange?: OnChangeFn<RowSelectionState>;
 };

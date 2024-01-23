@@ -1,10 +1,11 @@
 import { Checkbox, Chip, Tooltip, mergeClassnames } from "@heathmont/moon-core-tw";
+import DataHelper from "@heathmont/moon-table-v8-tw/lib/private/types/DataHelper";
 import { ArrowsRefreshRound, ControlsChevronDown, ControlsChevronRight } from "@heathmont/moon-icons-tw";
 import { Table } from "@heathmont/moon-table-v8-tw";
 import { ColumnDef, ExpandedState, Row, RowSelectionState, Table as TanStackTable } from "@tanstack/react-table";
 import React, { useCallback } from "react";
 
-type DataTypeHelper = {
+interface DataTypeHelper extends DataHelper {
   firstName: string,
   lastName: string,
   age: string,
@@ -322,7 +323,7 @@ const Example = () => {
     }
   ], [rowSelection]);
 
-  const getSubRows = useCallback(({ subRows }: DataTypeHelper) => subRows, []);
+  const getSubRows = useCallback(({ subRows }: DataHelper) => subRows as DataHelper[], []);
 
   return (
     <Table

@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react'
 import { Table } from "@heathmont/moon-table-v8-tw";
+import DataHelper from '@heathmont/moon-table-v8-tw/lib/private/types/DataHelper';
 import { ExpandedState, ColumnDef } from '@tanstack/react-table';
 import { ArrowsRefreshRound, ControlsChevronDown, ControlsChevronRight } from '@heathmont/moon-icons-tw';
 import { Chip, Tooltip } from '@heathmont/moon-core-tw';
 
-type Person = {
+interface Person extends DataHelper {
   firstName: string
   lastName: string
   age: number
@@ -174,7 +175,7 @@ const Example = () => {
   const [expanded, setExpanded] = React.useState<ExpandedState>(preset);
   const [data, setData] = React.useState(() => makeData(10, 5, 3));
 
-  const getSubRows = useCallback(({ subRows }: Person) => subRows as {}[], []);
+  const getSubRows = useCallback(({ subRows }: DataHelper) => subRows as DataHelper[], []);
 
   return (
     <Table

@@ -37,7 +37,7 @@ const Table = ({
   onExpandedChange,
   onRowSelectionChange,
 }: TableProps) => {
-  const table = useReactTable<{}>({
+  const table = useReactTable({
     columns,
     data,
     defaultColumn,
