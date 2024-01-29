@@ -24,6 +24,8 @@ type TableProps<D extends DataHelper = DataHelper> = {
   bodyBackgroundColor?: string;
   defaultRowBackgroundColor?: string;
   evenRowBackgroundColor?: string;
+  rowSelectColor?: string;
+  rowHoverColor?: string;
   rowGap?: string;
   rowSize?: RowSizes;
   isSticky?: boolean;
