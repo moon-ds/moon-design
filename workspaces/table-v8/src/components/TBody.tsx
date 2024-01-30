@@ -23,9 +23,9 @@ const TBody = ({
 
   const styles = {
     borderWidth: rowGap,
-    '--bodyBGColor': `rgba(var(--${backgroundColor}))`,
-    '--rowEvenColor': `rgba(var(--${evenRowBGColor}))`,
-    '--rowOddColor': `rgba(var(--${oddRowBGColor}))`,
+    '--bodyBGColor': `rgba(var(--${backgroundColor}, var(--gohan)))`,
+    '--rowEvenColor': `rgba(var(--${evenRowBGColor}, var(--goku)))`,
+    '--rowOddColor': `rgba(var(--${oddRowBGColor}, var(--goku)))`,
     '--rowSelectColor': `rgba(var(--${rowSelectColor}))`,
     '--rowHoverColor': `rgba(var(--${rowHoverColor}))`,
   } as const;

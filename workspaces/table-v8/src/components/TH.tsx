@@ -1,7 +1,6 @@
 import React, { forwardRef } from "react";
 import { mergeClassnames } from "@heathmont/moon-core-tw";
 import { flexRender, Header } from "@tanstack/react-table";
-import styled from "styled-components";
 import StickyColumn from "../private/types/StickyColumn";
 import THProps from "../private/types/THProps";
 import getFontSize from "../private/utils/getFontSize";
@@ -49,39 +48,30 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
       : header.column.columnDef;
     const stickySide = stickyColumn.sticky;
 
-    const stickyShift = stickySide
-      ? stickySide === "left"
-        ? `left: ${columnData ? columnData?.left : getStickyShift(header, "left")}px;`
-        : `right: ${columnData ? columnData?.right : getStickyShift(header, "right")}px;`
-      : undefined;
+    const styles = new Map([
+      ['width', `${header.column.columnDef.size}px`],
+      ['minWidth', `${stickySide ? header.column.columnDef.size : header.column.columnDef.minSize}px`],
+      ['maxWidth', `${stickySide ? header.column.columnDef.size : header.column.columnDef.maxSize}px`],
+      ['--headerBGColor', `rgba(var(--${backgroundColor}, var(--gohan)))`],
+    ]);
 
-    const stickyBefore = `
-      &::before {
-        background-color: rgb(var(--${backgroundColor?.replace(/^.+-(\w+)$/g, "$1")}));
-      };
-    `;
-
-    const HeadCell = styled.th`
-      width: ${header.column.columnDef.size}px;
-      min-width: ${stickySide
-        ? header.column.columnDef.size
-        : header.column.columnDef.minSize}px;
-      max-width: ${stickySide
-        ? header.column.columnDef.size
-        : header.column.columnDef.maxSize}px;
-      ${stickyShift && stickyShift}
-      ${stickySide && stickyBefore}
-    `;
+    if (stickySide) {
+      styles.set(stickySide, stickySide === "left"
+        ? `${columnData ? columnData?.left : getStickyShift(header, "left")}px;`
+        : `${columnData ? columnData?.right : getStickyShift(header, "right")}px;`
+      )
+    }
 
     return (
-      <HeadCell
+      <th
         key={header.id}
+        style={Object.fromEntries(styles)}
         colSpan={header.colSpan}
         className={mergeClassnames(
           "z-[1]",
           backgroundColor && backgroundColor,
           stickySide &&
-          "sticky before:absolute before:top-0 before:left-0 before:w-[calc(100%+1px)] before:h-full",
+          "sticky before:absolute before:top-0 before:left-0 before:w-[calc(100%+1px)] before:h-full before:bg-[color:var(--headerBGColor)]",
         )}
         ref={ref}
       >
@@ -99,7 +89,7 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
             ) : null}
           </div>
         )}
-      </HeadCell>
+      </th>
     );
   },
 );
