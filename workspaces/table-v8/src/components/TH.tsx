@@ -57,8 +57,8 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
 
     if (stickySide) {
       styles.set(stickySide, stickySide === "left"
-        ? `${columnData ? columnData?.left : getStickyShift(header, "left")}px;`
-        : `${columnData ? columnData?.right : getStickyShift(header, "right")}px;`
+        ? `${columnData ? columnData?.left : getStickyShift(header, "left")}px`
+        : `${columnData ? columnData?.right : getStickyShift(header, "right")}px`
       )
     }
 
@@ -69,7 +69,7 @@ const TH = forwardRef<HTMLTableCellElement, THProps>(
         colSpan={header.colSpan}
         className={mergeClassnames(
           "z-[1]",
-          backgroundColor && backgroundColor,
+          backgroundColor && "bg-[color:var(--headerBGColor)]",
           stickySide &&
           "sticky before:absolute before:top-0 before:left-0 before:w-[calc(100%+1px)] before:h-full before:bg-[color:var(--headerBGColor)]",
         )}

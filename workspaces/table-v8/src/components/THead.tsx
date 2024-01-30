@@ -1,5 +1,4 @@
 import React from "react";
-import { mergeClassnames } from "@heathmont/moon-core-tw";
 import TH from "./TH";
 import THeadProps from "../private/types/THeadProps";
 
@@ -21,9 +20,7 @@ const THead = ({
   return isSticky ? (
     <thead
       style={styles}
-      className={mergeClassnames(
-        "sticky z-[1] before:absolute before:w-full before:bottom-0 before:-top-[var(--beforeShift)] before:bg-[color:var(--headerBGColor)]",
-      )}
+      className={"sticky z-[1] before:absolute before:w-full before:bottom-0 before:-top-[var(--beforeShift)] before:bg-[color:var(--headerBGColor)]"}
     >
       {table.getHeaderGroups().map((headerGroup, indexHG) => (
         <tr key={headerGroup.id}>
