@@ -1,7 +1,6 @@
 import React, { forwardRef } from "react";
 import { mergeClassnames } from "@heathmont/moon-core-tw";
 import { flexRender, Cell } from "@tanstack/react-table";
-import styled from "styled-components";
 import ClipProps from "../private/types/ClipProps";
 import StickyColumn from "../private/types/StickyColumn";
 import TDProps from "../private/types/TDProps";
@@ -50,26 +49,23 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
       : cell.column.columnDef;
     const stickySide = stickyColumn.sticky;
 
-    const stickyShift = stickySide
-      ? stickySide === "left"
-        ? `left: ${columnData ? columnData?.left : getStickyShift(cells, index, "left")}px;`
-        : `right: ${columnData ? columnData?.right : getStickyShift(cells, index, "right")}px;`
-      : undefined;
+    const styles = new Map([
+      ['width', `${cell.column.columnDef.size}px`],
+      ['minWidth', `${stickySide ? cell.column.columnDef.size : cell.column.columnDef.minSize}px`],
+      ['maxWidth', `${stickySide ? cell.column.columnDef.size : cell.column.columnDef.maxSize}px`],
+    ]);
 
-    const BodyCell = styled.td`
-      width: ${cell.column.columnDef.size}px;
-      min-width: ${stickySide
-        ? cell.column.columnDef.size
-        : cell.column.columnDef.minSize}px;
-      max-width: ${stickySide
-        ? cell.column.columnDef.size
-        : cell.column.columnDef.maxSize}px;
-      ${stickyShift && stickyShift}
-    `;
+    if (stickySide) {
+      styles.set(stickySide, stickySide === "left"
+        ? `${columnData ? columnData?.left : getStickyShift(cells, index, "left")}px`
+        : `${columnData ? columnData?.right : getStickyShift(cells, index, "right")}px`
+      )
+    }
 
     return (
-      <BodyCell
+      <td
         key={cell.id}
+        style={Object.fromEntries(styles)}
         className={mergeClassnames(
           "box-border text-start",
           getFontSize(rowSize),
@@ -97,7 +93,7 @@ const TD = forwardRef<HTMLTableCellElement, TDProps>(
         ) : (
           flexRender(cell.column.columnDef.cell, cell.getContext())
         )}
-      </BodyCell>
+      </td>
     );
   },
 );
